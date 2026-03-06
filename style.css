@@ -1,0 +1,2864 @@
+/* =========================================
+   1. СИСТЕМНЫЙ ФУНДАМЕНТ (CORE)
+   ========================================= */
+:root {
+    /* ТЕМНАЯ ТЕМА (DEFAULT) */
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --accent: #FF4D00; /* Индустриальный оранжевый */
+    --text: #F2F2F2;
+    --text-muted: #666666;
+    --border: rgba(255, 255, 255, 0.08);
+    --font: 'Inter', -apple-system, sans-serif;
+    --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* СВЕТЛАЯ ТЕМА */
+[data-theme="light"] {
+    --bg: #F5F5F7;
+    --surface: #FFFFFF;
+    --text: #1D1D1F;
+    --text-muted: #86868B;
+    --border: rgba(0, 0, 0, 0.1);
+    --accent: #0066CC;
+}
+
+/* Глобальный сброс */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box !important; 
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+/* Контейнер-ограничитель */
+.wrap {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+}
+
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+
+/* =========================================
+   2. ШАПКА САЙТА (SITE HEADER)
+   ========================================= */
+.site-header {
+    height: 80px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10, 10, 10, 0.85); /* Эффект стекла */
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+[data-theme="light"] .site-header {
+    background: rgba(245, 245, 247, 0.85);
+}
+
+/* Сетка: Лого (слева) | Навигация (центр) | Утилиты (справа) */
+.header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+}
+
+/* Логотип */
+.logo {
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.logo span { color: var(--accent); }
+
+/* Центр: Меню */
+.main-nav {
+    display: flex;
+    gap: 35px;
+}
+.nav-link {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    position: relative;
+    padding: 5px 0;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+}
+/* Линия под активной ссылкой */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: 0.3s;
+}
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+/* Право: Языки, Тема, Профиль */
+.header-utilities {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.controls-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-right: 1px solid var(--border);
+    padding-right: 20px;
+}
+
+.lang-switch {
+    display: flex;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 900;
+}
+.lang-switch a { color: var(--text-muted); }
+.lang-switch a.active { color: var(--accent); }
+
+.theme-btn-minimal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.theme-btn-minimal:hover { opacity: 1; transform: scale(1.1); }
+
+/* Блок пользователя */
+.user-profile-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text);
+}
+
+.admin-badge {
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 6px 12px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    transition: 0.3s;
+}
+.admin-badge:hover { background: var(--accent); color: #000; }
+
+.logout-icon {
+    color: var(--text-muted);
+    display: flex;
+    transition: 0.3s;
+}
+.logout-icon:hover { color: #ff3333; }
+
+/* =========================================
+   3. ГЛАВНЫЙ БАННЕР (HERO SECTION)
+   ========================================= */
+   .banner {
+    padding: 160px 0 100px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    /* Убираем лишние центрирования, в индустриальном стиле 
+       лучше смотрится выравнивание по левому краю */
+}
+
+.banner h1 {
+    font-size: clamp(3rem, 10vw, 7rem); /* Шрифт подстраивается под экран */
+    line-height: 0.85;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: 900;
+    position: relative;
+    z-index: 1; /* Текст под фильтром */
+}
+
+/* Эффект контурных букв для выделенного слова в <span> */
+.banner h1 span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text);
+}
+
+.banner p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================
+   4. БЫСТРЫЙ ФИЛЬТР (QUICK FILTER)
+   ========================================= */
+.quick-filter-wrapper {
+    position: relative;
+    z-index: 10;      /* Фильтр ВСЕГДА поверх текста заголовка */
+    margin-top: -30px; /* Элегантное наложение на нижнюю часть баннера */
+}
+
+.quick-filter {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    max-width: 1000px;
+    /* Глубокая тень отделяет форму от фонового текста */
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6); 
+}
+
+/* Сетка формы: Марка (1.5) | Цена (1.5) | Кнопка (1) */
+.qf-form-industrial, 
+.qf-form-industrial-catalog {
+    display: grid !important;
+    /* Убедись, что колонок столько, сколько полей + кнопка */
+    grid-template-columns: 1.5fr 1.5fr 1fr; 
+    width: 100%;
+    /* ГЛАВНОЕ: Растягиваем все элементы по высоте самого высокого */
+    align-items: stretch !important; 
+    background: var(--border);
+    gap: 1px;
+    border: 1px solid var(--border);
+}
+
+.qf-group {
+    background: var(--surface);
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.qf-group label {
+    display: block;
+    font-size: 0.6rem;
+    color: var(--accent); /* Оранжевые заголовки полей */
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.qf-group select, 
+.qf-group input {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 700;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Стилизация выпадающего списка */
+.qf-group select option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+/* Кнопка "Найти" как монолитное продолжение фильтра */
+.btn-search-industrial, 
+.btn-catalog-search {
+    background: var(--accent) !important;
+    color: #000 !important;
+    border: none !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    
+    /* Убираем высоту и отступы, высоту теперь дает СЕТКА */
+    height: 100% !important; 
+    width: 100% !important;
+    padding: 0 !important; 
+    margin: 0 !important;
+    
+    /* Центрируем текст внутри растянутой кнопки */
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    
+    transition: background 0.2s ease;
+}
+
+.btn-search-industrial:hover, 
+.btn-catalog-search:hover {
+    background: #fff !important;
+}
+.qf-group:last-of-type {
+    border-right: none;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 900px) {
+    .qf-form-industrial {
+        grid-template-columns: 1fr; /* В одну колонку на телефонах */
+    }
+    .qf-group {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+    .btn-search-industrial {
+        padding: 25px;
+        height: auto;
+    }
+    .banner h1 {
+        font-size: 3.5rem;
+    }
+}
+
+/* =========================================
+   5. ПОЛОСА СТАТИСТИКИ (STATS STRIPE)
+   ========================================= */
+   .stats-stripe {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 ровные колонки */
+    width: 100%;
+}
+
+.stat-node {
+    padding: 80px 40px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-node:last-child {
+    border-right: none;
+}
+
+/* Эффект подсветки ячейки при наведении */
+.stat-node:hover {
+    background: var(--surface);
+}
+
+.stat-val {
+    font-size: 4.5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--accent); /* Оранжевый акцент */
+    display: block;
+}
+
+.stat-lbl {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   6. СЕКЦИЯ АВТОМОБИЛЕЙ (STOCK GRID)
+   ========================================= */
+.section-cars {
+    padding: 100px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+}
+
+.view-all-link {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text);
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+}
+
+/* Сетка с эффектом тонких линий (1px) */
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 в ряд */
+    gap: 1px;
+    background: var(--border); /* Цвет линий сетки */
+    border: 1px solid var(--border);
+}
+
+/* КАРТОЧКА (INDUSTRIAL CARD) */
+.industrial-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+}
+
+.industrial-card:hover .card-img {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Фотография */
+.card-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: #000;
+    overflow: hidden;
+}
+
+.card-anchor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+/* При наведении: фото становится цветным и плавно увеличивается */
+.industrial-card:hover .card-img {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.card-badges-left {
+    position: absolute;
+    top: 15px; left: 15px;
+    display: flex; flex-direction: column; gap: 5px;
+    z-index: 10;
+}
+
+.card-actions-right {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column; /* Выстраиваем в столбик */
+    gap: 6px;               /* Компактный отступ между кнопками */
+    z-index: 10;
+}
+
+.badge-tag {
+    font-size: 10px; font-weight: 900; padding: 4px 8px;
+    background: rgba(10, 10, 10, 0.8); border: 1px solid var(--border);
+}
+.badge-tag.verified { color: #00FF66; border-color: #00FF66; }
+.badge-tag.sold { color: var(--accent); border-color: var(--accent); }
+
+/* Стили кнопок избранного и сравнения */
+.fav-btn-ajax {
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    width: 34px !important;
+    height: 34px !important;
+    z-index: 20 !important;
+    
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+}
+
+.compare-btn-ajax {
+    position: absolute !important;
+    top: 55px !important; 
+    right: 15px !important;
+    width: 34px !important;
+    height: 34px !important;
+    z-index: 20 !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6) !important;
+    color: #fff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    cursor: pointer;
+}
+
+.fav-btn-ajax.active { 
+    background: var(--accent) !important; 
+    color: #000 !important; 
+    border-color: var(--accent) !important; 
+}
+
+.fav-btn-ajax:hover, .compare-btn-ajax:hover {
+    border-color: var(--accent) !important;
+    transform: scale(1.05);
+}
+
+.compare-btn-ajax.active { 
+    background: #fff !important; 
+    color: #000 !important; 
+    border-color: #fff !important; 
+}
+
+.fav-btn-ajax:hover, .compare-btn-ajax:hover {
+    border-color: var(--accent) !important;
+    transform: scale(1.05);
+}
+
+.compare-btn-ajax img, .fav-btn-ajax img {
+    display: none; /* Если ты использовал картинки, лучше использовать символы ⇄ и ❤ */
+}
+/* Текстовые данные */
+.card-data {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.data-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 5px 0 20px;
+    line-height: 1.1;
+    min-height: 2.2em; /* Резервируем место под 2 строки названия */
+}
+
+.data-ref { font-family: monospace; font-size: 12px; color: var(--text-muted); margin-bottom: 5px; }
+.data-title { font-size: 20px; font-weight: 900; margin-bottom: 25px; line-height: 1.1; min-height: 2.2em; }
+
+/* Характеристики YEAR // KM // PWR */
+.data-specs {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 25px;
+}
+
+.spec-unit {
+    display: flex;
+    flex-direction: column;
+}
+
+.unit-label {
+    font-size: 0.55rem;
+    font-weight: 900;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.unit-val {
+    font-family: monospace; /* Технический шрифт для цифр */
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+/* Цена внизу карточки */
+.price-amount {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--text);
+    margin-top: auto; /* Прижимает цену к низу */
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1200px) {
+    .car-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .car-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-node { border-right: none; border-bottom: 1px solid var(--border); }
+    .stat-val { font-size: 3rem; }
+}
+
+/* =========================================
+   7. СЕКЦИЯ ИНТЕРАКТИВНЫХ ФОРМ (TRADE-IN / TEST-DRIVE)
+   ========================================= */
+   .industrial-grid-2 { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 1px; 
+    background: var(--border); 
+    border: 1px solid var(--border); 
+    margin: 80px 0;
+}
+
+.form-card-industrial { 
+    background: var(--bg); 
+    padding: 60px 40px; 
+}
+
+.card-tag { 
+    font-size: 0.6rem; 
+    color: var(--accent); 
+    font-weight: 900; 
+    letter-spacing: 2px; 
+    margin-bottom: 15px; 
+}
+
+/* Стили полей ввода внутри форм */
+.inner-form input, 
+.inner-form select { 
+    width: 100%; 
+    padding: 18px; 
+    background: var(--surface); 
+    border: 1px solid var(--border); 
+    color: #fff; 
+    margin-bottom: 15px; 
+    outline: none; 
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.inner-form input:focus { border-color: var(--accent); }
+
+/* Универсальная массивная кнопка для форм */
+.btn-industrial-full, 
+.btn-search-industrial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: 100%;           /* Ширина на весь контейнер */
+    max-width: 400px;      /* Ограничим максимальную ширину, чтобы не была во весь экран */
+    height: 60px;          /* Четкая, фиксированная высота */
+    margin: 40px auto 0;   /* Центрируем кнопку и даем отступ сверху */
+    
+    background: var(--accent);
+    color: #000 !important;
+    border: none;
+    
+    font-size: 0.85rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 0;      /* Оставляем острые углы для стиля */
+}
+
+.btn-industrial-full:hover, 
+.btn-search-industrial:hover {
+    background: #fff;
+    transform: translateY(-2px);
+}
+
+.form-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем кнопку внутри широкого блока */
+    width: 100%;
+}
+
+/* =========================================
+   8. КРЕДИТНЫЙ КАЛЬКУЛЯТОР (REFINED PANEL)
+   ========================================= */
+.calc-panel-refined { 
+    display: grid; 
+    grid-template-columns: 1.2fr 0.8fr; 
+    border: 1px solid var(--border); 
+    background: var(--surface); 
+    margin: 80px 0; 
+    overflow: hidden;
+}
+
+/* Левая часть: Ползунки */
+.calc-inputs-side { 
+    padding: 60px; 
+    background: var(--bg); 
+}
+
+.range-header { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 15px; 
+    font-family: monospace; 
+}
+.range-header label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800; }
+.range-header span { font-size: 1.1rem; font-weight: 900; color: #fff; }
+
+/* КАСТОМНЫЙ ПОЛЗУНОК (RANGE) */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    outline: none;
+    margin-bottom: 40px;
+}
+
+/* Квадратный оранжевый бегунок */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    cursor: pointer;
+    transition: 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 15px var(--accent); }
+
+/* Правая часть: Результат */
+.calc-result-side { 
+    padding: 60px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    background: #000; 
+    text-align: center;
+    border-left: 1px solid var(--border);
+}
+
+.result-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+.result-amount { font-size: 4.5rem; font-weight: 900; color: var(--accent); line-height: 1; margin: 20px 0 40px; }
+
+/* =========================================
+   9. ПРОТОКОЛ ПРОВЕРКИ (DIAGNOSTIC)
+   ========================================= */
+.protocol-grid-industrial {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 50px;
+}
+
+/* --- КОРРЕКЦИЯ КАРТОЧЕК ПРОТОКОЛА --- */
+.prot-box {
+    background: var(--bg);
+    padding: 40px 30px;
+    min-height: 280px; /* Увеличили высоту для длинного текста */
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.prot-box p {
+    font-size: 0.85rem; /* Чуть увеличили шрифт для читаемости */
+    color: var(--text-muted);
+    line-height: 1.7; /* Увеличили межстрочный интервал */
+    margin-top: 15px;
+}
+
+.prot-box:hover {
+    background: var(--surface);
+    border-color: var(--accent);
+}
+
+.prot-box h3 {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.prot-code { 
+    font-family: monospace; 
+    font-size: 0.65rem; 
+    color: var(--accent); 
+    display: block; 
+    margin-bottom: 15px; 
+}
+
+.prot-box h3 { font-size: 1rem; margin-bottom: 10px; }
+.prot-box p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Анимация сканирующей линии */
+/* --- ИСПРАВЛЕННЫЙ ХЕДЕР ПРОТОКОЛА --- */
+.protocol-header-refined {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Центрируем по вертикали */
+    margin-bottom: 40px;
+    gap: 30px;
+}
+
+/* Ограничитель для бегущей строки */
+.status-marquee {
+    flex: 1; /* Занимает всё свободное место */
+    max-width: 400px; /* Чтобы не растягивалась на весь экран */
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba(0, 255, 102, 0.05); /* Едва заметный зеленый фон */
+    border: 1px solid rgba(0, 255, 102, 0.2);
+    padding: 8px 0;
+    position: relative;
+}
+
+/* Сама анимация */
+.marquee-content {
+    display: inline-block;
+    padding-left: 100%; /* Начало за пределами видимости */
+    animation: marquee-industrial 15s linear infinite;
+}
+
+.marquee-content span {
+    font-family: monospace;
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: #00FF66; /* Яркий зеленый */
+    text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+    letter-spacing: 1px;
+}
+
+@keyframes marquee-industrial {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Визуальный эффект "затухания" по краям строки */
+.status-marquee::before,
+.status-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; width: 30px; z-index: 2;
+}
+.status-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+}
+.status-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .protocol-header-refined {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .status-marquee {
+        max-width: 100%;
+    }
+}
+
+@keyframes scanLine { 0% { left: -30%; } 100% { left: 100%; } }
+
+@media (max-width: 1024px) {
+    .calc-panel-refined, .industrial-grid-2, .protocol-grid-industrial { grid-template-columns: 1fr; }
+    .calc-result-side { border-left: none; border-top: 1px solid var(--border); }
+}
+
+/* =========================================
+   10. СЕКЦИЯ ОТЗЫВОВ (CLIENT VOICES)
+   ========================================= */
+   .section-reviews { padding: 100px 0; }
+
+   .reviews-grid { 
+       display: grid; 
+       grid-template-columns: 1fr 1fr; 
+       gap: 30px; 
+       margin-top: 50px;
+   }
+   
+   .review-item { 
+       background: var(--surface); 
+       padding: 40px; 
+       border: 1px solid var(--border); 
+       position: relative;
+   }
+   
+   .rev-meta { 
+       font-size: 0.65rem; 
+       font-weight: 800; 
+       color: var(--accent); 
+       text-transform: uppercase; 
+       letter-spacing: 2px;
+       margin-bottom: 20px;
+       display: block;
+   }
+   
+   .review-item p { 
+       font-size: 1.1rem; 
+       font-style: italic; 
+       color: var(--text); 
+       line-height: 1.6;
+   }
+   
+   /* Форма написания отзыва */
+   .add-review-form {
+       max-width: 700px;
+       margin: 60px auto 0;
+       padding: 40px;
+       border: 1px solid var(--border);
+       background: var(--bg);
+   }
+   
+   /* =========================================
+      11. ЛИЧНЫЙ КАБИНЕТ (PROFILE)
+      ========================================= */
+   .page-profile { padding: 80px 0; }
+   
+   .profile-header-industrial { 
+       display: flex; 
+       align-items: center; 
+       gap: 40px; 
+       padding-bottom: 60px; 
+       border-bottom: 1px solid var(--border); 
+       margin-bottom: 60px; 
+   }
+   
+   .profile-avatar-big { 
+       width: 120px; 
+       height: 120px; 
+       background: var(--surface); 
+       border: 1px solid var(--accent); 
+       display: flex; 
+       align-items: center; 
+       justify-content: center; 
+       font-size: 3rem; 
+       font-weight: 900; 
+       color: var(--accent);
+   }
+   
+   .profile-avatar-big img { width: 100%; height: 100%; object-fit: cover; }
+   
+   .role-tag { font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px; }
+   .logout-link { font-size: 0.75rem; font-weight: 800; text-decoration: underline; color: var(--text-muted); margin-top: 10px; display: inline-block; }
+   
+   /* =========================================
+      12. АВТОРИЗАЦИЯ (LOGIN / REGISTER)
+      ========================================= */
+   .page-auth { 
+       display: flex; 
+       align-items: center; 
+       justify-content: center; 
+       min-height: 80vh; 
+   }
+   
+   .auth-box-industrial { 
+       width: 100%; 
+       max-width: 450px; 
+       border: 1px solid var(--border); 
+       padding: 60px 50px; 
+       background: var(--surface);
+   }
+   
+   .auth-box-industrial h1 { margin-bottom: 40px; text-align: center; font-size: 2.5rem; }
+   
+   .error-msg { 
+       background: rgba(255, 0, 0, 0.1); 
+       color: #ff4444; 
+       padding: 15px; 
+       font-size: 0.7rem; 
+       font-weight: 800; 
+       border: 1px solid #ff4444; 
+       margin-bottom: 20px; 
+       text-align: center;
+   }
+   
+   /* =========================================
+      13. АДМИН-ПАНЕЛЬ (TABLES & HUB)
+      ========================================= */
+   .admin-hub-grid { 
+       display: grid; 
+       grid-template-columns: repeat(3, 1fr); 
+       gap: 1px; 
+       background: var(--border); 
+       border: 1px solid var(--border); 
+       margin-top: 50px;
+   }
+   
+   .hub-card { 
+       background: var(--bg); 
+       padding: 50px 40px; 
+       min-height: 280px; 
+       display: flex; 
+       flex-direction: column; 
+       transition: 0.3s; 
+   }
+   .hub-card:hover { background: var(--surface); }
+   
+   .admin-table { 
+       width: 100%; 
+       border-collapse: collapse; 
+       border: 1px solid var(--border); 
+       margin-top: 40px; 
+   }
+   
+   .admin-table th { 
+       background: var(--surface); 
+       padding: 20px; 
+       text-align: left; 
+       font-size: 0.7rem; 
+       text-transform: uppercase; 
+       color: var(--text-muted); 
+       border-bottom: 1px solid var(--border); 
+   }
+   
+   .admin-table td { 
+       padding: 20px; 
+       border-bottom: 1px solid var(--border); 
+       font-size: 0.85rem; 
+   }
+   
+   /* =========================================
+      14. ФУТЕР (FAT FOOTER)
+      ========================================= */
+   .site-footer { 
+       background: #050505; 
+       border-top: 1px solid var(--border); 
+       padding: 100px 0 40px; 
+       margin-top: 120px; 
+   }
+   
+   .footer-main-grid { 
+       display: grid; 
+       grid-template-columns: 1.5fr 1fr 1fr 1fr; 
+       gap: 60px; 
+       padding-bottom: 60px; 
+       border-bottom: 1px solid var(--border); 
+   }
+   
+   .footer-col h4 { 
+       font-size: 0.75rem; 
+       font-weight: 900; 
+       color: var(--accent); 
+       margin-bottom: 25px; 
+       letter-spacing: 1px;
+   }
+   
+   .footer-nav-list a, .footer-info-text { 
+       display: block; 
+       color: var(--text-muted); 
+       font-size: 0.9rem; 
+       margin-bottom: 12px; 
+   }
+   
+   .footer-nav-list a:hover { color: var(--text); transform: translateX(5px); }
+   
+   /* Социальные кнопки-квадраты */
+   .footer-social-links { display: flex; gap: 10px; }
+   
+   .social-box { 
+       width: 40px; 
+       height: 40px; 
+       border: 1px solid var(--border); 
+       display: flex; 
+       align-items: center; 
+       justify-content: center; 
+       font-size: 0.7rem; 
+       font-weight: 900; 
+       color: var(--text-muted); 
+       transition: 0.3s;
+   }
+   .social-box:hover { border-color: var(--accent); color: var(--accent); }
+   
+   .footer-bottom-panel { 
+       padding-top: 40px; 
+       display: flex; 
+       justify-content: space-between; 
+       font-size: 0.65rem; 
+       color: var(--text-muted); 
+       text-transform: uppercase;
+   }
+   
+   /* =========================================
+      15. ФИНАЛЬНЫЕ МЕДИА-ЗАПРОСЫ
+      ========================================= */
+   @media (max-width: 1100px) {
+       .footer-main-grid { grid-template-columns: 1fr 1fr; }
+       .reviews-grid { grid-template-columns: 1fr; }
+       .admin-hub-grid { grid-template-columns: repeat(2, 1fr); }
+   }
+   
+   @media (max-width: 700px) {
+       .footer-main-grid, .admin-hub-grid { grid-template-columns: 1fr; }
+       .header-inner { grid-template-columns: 1fr 1fr; }
+       .main-nav { display: none; }
+       .wrap { padding: 0 20px; }
+   }
+
+   /* =========================================
+   16. КАТАЛОГ (STOCK LIST)
+   ========================================= */
+.page-catalog { padding: 60px 0; }
+
+/* Панель фильтра в каталоге */
+.filter-panel-industrial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 30px 40px;
+    margin-bottom: 60px;
+}
+
+.filter-flex {
+    display: flex;
+    align-items: flex-end;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 250px;
+}
+
+.filter-group label {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.reset-filter {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding-bottom: 15px;
+    border-bottom: 1px solid transparent;
+}
+.reset-filter:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Сообщение о пустом результате */
+.empty-results {
+    grid-column: span 4;
+    text-align: center;
+    padding: 100px 0;
+    border: 1px dashed var(--border);
+}
+.empty-results h2 { color: var(--text-muted); font-size: 2rem; margin-bottom: 10px; }
+
+/* =========================================
+   17. СТРАНИЦА TRADE-IN (EVALUATE)
+   ========================================= */
+.page-evaluate { padding: 80px 0; display: flex; justify-content: center; }
+
+.form-container-industrial {
+    width: 100%;
+    max-width: 800px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 60px;
+}
+
+.industrial-form label {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.success-screen { text-align: center; padding: 40px 0; }
+.success-screen h1 { font-size: 5rem; color: #00FF66; margin-bottom: 20px; }
+
+/* =========================================
+   18. АДМИН-ПАНЕЛЬ: ХАБ (DASHBOARD)
+   ========================================= */
+.page-admin-hub { padding: 60px 0; }
+
+.admin-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 60px;
+}
+
+.hub-card {
+    background: var(--bg);
+    padding: 60px 40px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.4s;
+}
+.hub-card:hover { background: var(--surface); }
+
+.hub-num { font-family: monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 30px; }
+.hub-icon { font-size: 2rem; margin-bottom: 20px; opacity: 0.5; }
+.hub-body h3 { font-size: 1.6rem; margin-bottom: 10px; }
+.hub-body p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+.hub-footer { margin-top: auto; font-size: 0.7rem; font-weight: 900; color: var(--accent); opacity: 0; transition: 0.3s; }
+.hub-card:hover .hub-footer { opacity: 1; }
+
+/* Акцентная карточка (Inventory) */
+.hub-card.highlight {
+    background: rgba(255, 77, 0, 0.05);
+    border: 1px solid var(--accent);
+}
+
+/* =========================================
+   19. АДМИН-ПАНЕЛЬ: CRM (LEADS)
+   ========================================= */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+}
+
+.admin-table th {
+    background: var(--surface);
+    padding: 20px;
+    text-align: left;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.admin-table td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.85rem;
+    vertical-align: middle;
+}
+
+.admin-table tr:hover { background: rgba(255, 255, 255, 0.02); }
+
+/* Кнопки действий в таблице */
+.action-btn {
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text);
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    margin-right: 10px;
+}
+.action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.action-btn.del { color: #ff3333; }
+.action-btn.del:hover { border-color: #ff3333; background: rgba(255,0,0,0.1); }
+
+/* =========================================
+   20. АДМИН-ПАНЕЛЬ: ДОБАВЛЕНИЕ АВТО (FORM)
+   ========================================= */
+.page-admin-form { padding: 60px 0; }
+
+.industrial-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 50px;
+}
+
+.form-col { display: flex; flex-direction: column; }
+.form-full { grid-column: span 2; }
+
+/* Чекбоксы в админке */
+.checkbox-group {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.7rem;
+    color: var(--text);
+    cursor: pointer;
+}
+.checkbox-group input[type="checkbox"] {
+    width: 18px; height: 18px; margin: 0;
+    accent-color: var(--accent);
+}
+
+.success-banner {
+    background: #00FF66;
+    color: #000;
+    padding: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* =========================================
+   21. АДАПТИВНОСТЬ ВНУТРЕННИХ СТРАНИЦ
+   ========================================= */
+@media (max-width: 1000px) {
+    .filter-flex { flex-direction: column; align-items: stretch; }
+    .filter-group { min-width: 100%; }
+    .industrial-form-grid { grid-template-columns: 1fr; gap: 20px; }
+    .form-full { grid-column: span 1; }
+    .admin-hub-grid { grid-template-columns: 1fr; }
+    .admin-table { font-size: 0.7rem; }
+    .admin-table th, .admin-table td { padding: 10px; }
+}
+
+/* --- ИСПРАВЛЕНИЕ СЕТКИ И ПОЛЕЙ ВВОДА --- */
+
+/* Контейнер формы */
+.form-container-industrial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 60px;
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Сетка: 2 колонки */
+.industrial-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Ровно две половины */
+    gap: 30px 40px; /* Отступы между полями */
+    width: 100%;
+}
+
+/* Колонки и группы */
+.form-col {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Расстояние между вертикальными парами (Марка/Модель) */
+}
+
+.form-full {
+    grid-column: span 2; /* Растянуть на всю ширину */
+    margin-top: 10px;
+}
+
+/* Стилизация самих полей */
+.input-unit {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-unit label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.input-unit input {
+    width: 100%;
+    background: #000 !important; /* Принудительно черный фон */
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: monospace; /* Для тех. данных */
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-unit input:focus {
+    border-color: var(--accent) !important;
+    background: #050505 !important;
+}
+
+/* Плейсхолдер (подсказка внутри) */
+.input-unit input::placeholder {
+    color: #333;
+    font-size: 0.8rem;
+}
+
+/* Кнопка */
+.btn-search-industrial {
+    width: 100%;
+    height: 70px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-search-industrial:hover {
+    background: #fff;
+}
+
+/* --- ADMIN FORM REFINEMENT --- */
+.page-admin-form { padding-bottom: 100px; }
+
+/* Принудительный сброс белого фона для инпутов */
+.industrial-form-grid input, 
+.industrial-form-grid select, 
+.industrial-form-grid textarea {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    color: #fff !important;
+    border-radius: 0 !important;
+    padding: 15px !important;
+    margin-top: 5px;
+    font-family: monospace;
+}
+
+/* .industrial-form-grid select {
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='orange'%3E%3Cpath d='M0 0h12L6 12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+} */
+
+/* Стилизация чекбоксов */
+.checkbox-industrial-group {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.custom-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.65rem !important;
+    font-weight: 800 !important;
+    color: var(--text-muted);
+}
+
+.custom-check input[type="checkbox"] {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.custom-check:hover span { color: var(--accent); }
+
+/* Поле выбора файла */
+.industrial-file-input {
+    border: 1px dashed var(--border) !important;
+    padding: 30px !important;
+    text-align: center;
+    cursor: pointer;
+    background: var(--bg) !important;
+}
+
+.industrial-file-input:hover {
+    border-color: var(--accent) !important;
+}
+
+/* Баннер успеха */
+.success-banner {
+    background: #00FF66;
+    color: #000;
+    padding: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* --- CAR DETAIL PAGE (Industrial Pro) --- */
+.car-detail-page { padding: 60px 0; }
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr; /* Галерея шире, чем инфо */
+    gap: 60px;
+    align-items: start;
+}
+
+/* Галерея */
+.main-visual-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+.main-visual-stage img { width: 100%; height: 100%; object-fit: contain; transition: 0.3s opacity; }
+
+.gallery-nav-arrows {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    pointer-events: none;
+}
+.nav-arrow {
+    pointer-events: auto;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: 1px solid var(--border);
+    width: 50px; height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.nav-arrow:hover { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* Миниатюры */
+.thumbnail-strip {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+.thumb-node {
+    aspect-ratio: 4/3;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    filter: grayscale(1);
+    transition: 0.3s;
+}
+.thumb-node img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-node:hover, .thumb-node.active { filter: grayscale(0); border-color: var(--accent); }
+
+/* Правая колонка */
+.sticky-info-card {
+    position: sticky;
+    top: 100px;
+    padding: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.brand-line { font-size: 0.7rem; font-weight: 800; color: var(--text-muted); display: block; }
+.model-line { font-size: 3rem; margin: 10px 0 20px; }
+.price-line { font-size: 2.5rem; font-weight: 900; color: var(--accent); margin-bottom: 40px; }
+.price-line small { font-size: 1rem; color: var(--text-muted); }
+
+/* Таблица ТТХ */
+.specs-table-refined { width: 100%; border-collapse: collapse; margin-top: 20px; }
+.specs-table-refined td { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.75rem; font-weight: 800; }
+.specs-table-refined td:last-child { text-align: right; color: var(--text-muted); font-family: monospace; }
+
+.car-actions { display: flex; flex-direction: column; gap: 15px; margin-bottom: 40px; }
+
+.btn-industrial-outline {
+    background: transparent; border: 1px solid var(--border); color: #fff; padding: 15px; font-weight: 900; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 0.75rem;
+}
+.btn-industrial-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-industrial-outline.active { background: var(--accent); color: #000; border-color: var(--accent); }
+
+/* Форма */
+.callback-mini-panel { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border); }
+.btn-small-industrial { background: var(--text); color: #000; border: none; padding: 12px; font-weight: 900; width: 100%; cursor: pointer; font-size: 0.7rem; }
+
+@media (max-width: 1000px) {
+    .detail-grid { grid-template-columns: 1fr; }
+    .sticky-info-card { position: static; }
+}
+
+/* --- CALLBACK PANEL REFINEMENT --- */
+.callback-mini-panel {
+    background: var(--surface); /* Темно-серый фон блока */
+    border: 1px solid var(--border);
+    padding: 35px;
+    margin-top: 40px;
+    position: relative;
+}
+
+.callback-mini-panel h3 {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+/* Стилизация поля ввода */
+.callback-mini-panel .input-unit {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.callback-mini-panel label {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent); /* Оранжевый заголовок */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.callback-mini-panel input {
+    background: #000 !important; /* Принудительно черный фон */
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: monospace;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    border-radius: 0;
+}
+
+.callback-mini-panel input:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Кнопка */
+.callback-mini-panel .btn-industrial-full {
+    height: 65px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.callback-mini-panel .btn-industrial-full:hover {
+    background: #fff;
+}
+
+/* Мелкая техническая подпись внизу */
+.form-status-line {
+    margin-top: 15px;
+    font-size: 0.55rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-status-line .dot {
+    width: 4px;
+    height: 4px;
+    background: #00FF66; /* Зеленая точка "онлайн" */
+    border-radius: 50%;
+    box-shadow: 0 0 5px #00FF66;
+}
+
+/* --- CREDIT FORM SPECIFIC --- */
+
+/* Делаем выпадающий список (Select) таким же как инпуты */
+.auth-box-industrial select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #000 !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='orange'%3E%3Cpath d='M0 0h12L6 12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 50px !important;
+    cursor: pointer;
+}
+
+/* Общие стили для полей в этом блоке */
+.input-unit {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-unit label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.input-unit input, 
+.input-unit select {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: monospace;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 0;
+    width: 100%;
+}
+
+.input-unit input:focus, 
+.input-unit select:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Кнопка на всю ширину */
+.btn-industrial-full {
+    height: 70px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-industrial-full:hover {
+    background: #fff;
+}
+
+/* --- CATALOG FILTER REFINEMENT --- */
+.filter-panel-industrial {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 30px 40px;
+    margin: 40px 0 60px 0;
+}
+
+.filter-flex {
+    display: flex;
+    align-items: flex-end; /* Чтобы поля и кнопка сброса стояли на одной линии */
+    gap: 40px;
+}
+
+.filter-group {
+    flex: 1;
+    max-width: 350px;
+}
+
+.filter-group label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+/* Стилизация Select и Input */
+.filter-group select, 
+.filter-group input {
+    width: 100%;
+    background: #000 !important; /* Черный фон вместо белого */
+    border: 1px solid var(--border) !important;
+    padding: 15px !important;
+    color: #fff !important;
+    font-size: 1rem;
+    font-weight: 700;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: 0.3s;
+}
+
+.filter-group input::placeholder { color: #333; }
+
+/* Кастомная стрелка для Select */
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--accent); /* Оранжевая стрелочка */
+    pointer-events: none;
+}
+
+.filter-group select:focus, 
+.filter-group input:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Ссылка сброса */
+.reset-filter-link {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: var(--text-muted);
+    padding-bottom: 15px; /* Выравнивание по базовой линии инпутов */
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.reset-filter-link:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 900px) {
+    .filter-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    .filter-group {
+        max-width: 100%;
+    }
+}
+
+/* --- INDUSTRIAL FORMS RESET & STYLE --- */
+
+/* Контейнер для двух форм */
+.industrial-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px; /* Линия разделителя */
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 80px 0;
+}
+
+.form-card-industrial {
+    background: var(--bg) !important;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Группа "Метка + Инпут" */
+.form-group-industrial {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group-industrial label {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent); /* Оранжевые подписи */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+/* Принудительный стиль для инпутов (убиваем белый фон) */
+.form-card-industrial input, 
+.form-card-industrial select {
+    width: 100% !important;
+    background: #000 !important; /* Чисто черный фон */
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: monospace;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 0 !important;
+    margin: 0 !important; /* Убираем лишние отступы браузера */
+}
+
+.form-card-industrial input:focus, 
+.form-card-industrial select:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Компактный ряд для Года и Пробега */
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Кнопка на всю ширину */
+.btn-industrial-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px; /* Массивная высота */
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-industrial-full:hover {
+    background: #fff;
+}
+
+/* Календарь и селект - фикс цвета иконок */
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='orange'%3E%3Cpath d='M0 0h12L6 12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    appearance: none;
+}
+
+/* --- INDUSTRIAL ADMIN TABS --- */
+.admin-tabs-container {
+    display: flex;
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    width: fit-content; /* Чтобы рамка не растягивалась на весь экран */
+    background: var(--bg);
+}
+
+.tab-link {
+    padding: 18px 30px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-right: 1px solid var(--border);
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tab-link:last-child {
+    border-right: none;
+}
+
+/* Код вкладки (маленькая цифра) */
+.tab-code {
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    opacity: 0.6;
+}
+
+/* Эффект наведения */
+.tab-link:hover {
+    background: var(--surface);
+    color: var(--text);
+}
+
+/* АКТИВНАЯ ВКЛАДКА (Акцентная) */
+.tab-link.active {
+    background: var(--accent); /* Оранжевый фон */
+    color: #000 !important;    /* Черный текст */
+}
+
+.tab-link.active .tab-code {
+    color: #000;
+    opacity: 1;
+}
+
+/* Адаптивность для вкладок */
+@media (max-width: 900px) {
+    .admin-tabs-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+    }
+    .tab-link {
+        border-bottom: 1px solid var(--border);
+        justify-content: center;
+    }
+    .tab-link:nth-child(even) {
+        border-right: none;
+    }
+}
+
+.manager-filters-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 40px;
+    margin-bottom: 2px; /* Чтобы таблица прилипала к фильтру */
+}
+
+.filter-flex-mini {
+    display: flex;
+    align-items: center;
+}
+
+.filter-unit label {
+    font-size: 0.55rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.filter-unit select {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.status-badge {
+    border: 1px solid;
+    padding: 4px 8px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+.status-new { color: var(--accent); border-color: var(--accent); }
+.status-processing { color: #00AAFF; border-color: #00AAFF; }
+.status-closed { color: #00FF66; border-color: #00FF66; opacity: 0.5; }
+
+/* --- REVIEWS STYLING --- */
+.reviews-grid-industrial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+}
+
+.review-item {
+    background: var(--bg);
+    padding: 50px;
+    transition: 0.3s;
+}
+
+.review-item:hover { background: var(--surface); }
+
+.rev-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.rev-meta { font-size: 0.65rem; font-weight: 800; color: var(--text-muted); letter-spacing: 1px; }
+
+.rev-car-tag {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    margin-bottom: 15px;
+}
+
+.rev-content {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+/* Фикс инпутов в форме отзывов */
+.industrial-form select,
+.industrial-form input {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    margin-bottom: 20px;
+}
+
+/* Добавь это, чтобы textarea выглядела как инпуты */
+.industrial-form textarea {
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+    resize: vertical;
+}
+
+.industrial-form textarea:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Фикс кнопки, чтобы текст был черным на оранжевом */
+.btn-search-industrial {
+    color: #000 !important;
+    font-weight: 900;
+    text-align: center;
+}   
+
+.section-recent {
+    padding: 80px 0;
+    border-top: 1px solid var(--border);
+    background: linear-gradient(to bottom, var(--surface), var(--bg));
+}
+
+.filter-flex {
+    display: flex;
+    align-items: flex-end; /* Кнопка и инпуты выровнены по низу */
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* СТИЛЬ КНОПКИ "НАЙТИ" */
+.btn-catalog-search {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    
+    /* Типографика */
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+    /* Выравнивание */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    height: 100%; /* Растягивается на всю высоту ряда */
+}
+
+.btn-catalog-search:hover {
+    background: #fff;
+    color: #000;
+}
+
+.btn-catalog-search:active {
+    background: var(--text-muted);
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1100px) {
+    .qf-form-industrial-catalog {
+        grid-template-columns: 1fr 1fr; /* 2x2 на планшетах */
+    }
+    .btn-catalog-search {
+        height: 70px; /* Фиксированная высота, когда кнопка на отдельной строке */
+    }
+}
+
+@media (max-width: 700px) {
+    .qf-form-industrial-catalog {
+        grid-template-columns: 1fr; /* В одну колонку на телефонах */
+    }
+}
+/* Ссылка сброса */
+.reset-filter-link {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+}
+
+/* --- COMPARE SYSTEM --- */
+.compare-table-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.compare-grid {
+    display: grid;
+    min-width: 1000px;
+}
+
+.compare-labels {
+    background: rgba(255, 255, 255, 0.02);
+    border-right: 1px solid var(--border);
+}
+
+.c-label, .c-value {
+    padding: 25px;
+    height: 100px; /* Фиксированная высота ячейки для ровности */
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+}
+
+.c-label {
+    font-weight: 900;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+}
+
+.compare-column {
+    border-right: 1px solid var(--border);
+    transition: 0.3s;
+}
+.compare-column:hover { background: rgba(255,255,255,0.02); }
+
+.cell-img { height: 180px; padding: 10px; }
+.cell-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: 0.3s; }
+.compare-column:hover .cell-img img { filter: grayscale(0); }
+
+.price-val { color: var(--accent); font-weight: 900; font-size: 1.1rem; }
+
+/* Кнопка ⇄ в каталоге */
+.compare-btn-ajax {
+    position: absolute; top: 15px; right: 60px; /* Рядом с сердечком */
+    width: 35px; height: 35px; border: 1px solid var(--border);
+    background: rgba(10,10,10,0.6); color: #fff; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; z-index: 5;
+}
+.compare-btn-ajax.active { background: #fff; color: #000; border-color: #fff; }
+
+/* Индикатор количества в шапке */
+.compare-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent); /* Оранжевый */
+    color: #000;
+    font-size: 0.6rem;
+    font-weight: 900;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 2px; /* Индустриальный квадратный стиль */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Эффект при обновлении (всплеск) */
+.count-badge.bump {
+    transform: scale(1.4);
+}
+
+/* Если в сравнении пусто, можно сделать иконку тусклее */
+.count-badge:empty, .count-badge[value="0"] {
+    display: none;
+}
+
+/* --- НОВАЯ СЕТКА ХЕДЕРА --- */
+.site-header {
+    height: 70px;
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 1000;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between; /* Расталкиваем блоки по краям */
+    align-items: center;
+    height: 100%;
+}
+
+/* Логотип */
+.main-logo-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+}
+.logo-img-box { height: 32px; width: 32px; flex-shrink: 0; }
+.logo-pic { height: 100%; width: auto; object-fit: contain; }
+.logo-text-box { font-size: 1rem; font-weight: 900; color: #fff; letter-spacing: 1px; }
+.logo-text-box span { color: var(--accent); }
+
+/* Навигация (центр) */
+.main-nav {
+    display: flex;
+    gap: 25px;
+    margin: 0 20px;
+}
+.nav-link {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+.nav-link:hover { color: var(--accent); }
+
+/* Счетчик сравнения */
+.nav-compare-wrapper { display: flex; align-items: center; gap: 6px; }
+.count-badge-mini {
+    background: var(--accent);
+    color: #000;
+    font-size: 0.55rem;
+    font-weight: 900;
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+/* Правая часть */
+.header-utilities {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 220px;
+    justify-content: flex-end;
+}
+
+/* Группа инструментов (Язык/Тема) */
+.controls-bundle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-right: 1px solid var(--border);
+    padding-right: 15px;
+}
+
+.lang-switch-mini {
+    display: flex;
+    gap: 6px;
+    font-size: 0.6rem;
+    font-weight: 900;
+}
+.lang-switch-mini a { color: var(--text-muted); text-decoration: none; }
+.lang-switch-mini a.active { color: var(--accent); }
+
+.theme-btn-minimal {
+    background: none; border: none; cursor: pointer; font-size: 0.9rem;
+}
+
+/* Профиль */
+.user-logged-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-name-link {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+}
+
+.admin-btn-accent {
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 8px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.admin-btn-accent:hover { background: var(--accent); color: #000; }
+
+.logout-icon-small { color: var(--text-muted); display: flex; transition: 0.2s; }
+.logout-icon-small:hover { color: #ff3333; }
+
+/* Кнопки входа для гостей */
+.login-link-minimal { font-size: 0.65rem; font-weight: 800; color: #fff; text-decoration: none; margin-right: 10px; }
+.register-btn-industrial { background: #fff; color: #000; padding: 6px 12px; font-size: 0.6rem; font-weight: 900; text-decoration: none; }
+
+/* Блок условий покупки */
+.purchase-conditions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+}
+
+.condition-item {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.condition-item span {
+    font-size: 1.1rem;
+}
+
+/* Ряд быстрых кнопок */
+.fast-contact-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.btn-industrial-outline {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.75rem;
+    transition: 0.3s;
+}
+
+.btn-industrial-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* --- AUTH PAGES REFINEMENT --- */
+.page-auth {
+    display: flex;
+    flex-direction: column; /* Принудительно ставим элементы в колонку */
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px); /* Высота на весь экран минус шапка/подвал */
+    padding: 100px 0;
+}
+
+.auth-box-industrial {
+    width: 100%;
+    max-width: 480px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 60px 50px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.auth-box-industrial h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Принудительная блочная структура (чтобы не было в строку) */
+.input-unit {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.input-unit label {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* Убираем белый фон */
+.input-unit input {
+    width: 100% !important;
+    background: #000 !important;
+    border: 1px solid var(--border) !important;
+    padding: 18px !important;
+    color: #fff !important;
+    font-family: monospace;
+    font-size: 1rem;
+    outline: none;
+    border-radius: 0 !important;
+}
+
+.input-unit input:focus {
+    border-color: var(--accent) !important;
+}
+
+/* Стилизация кнопки */
+.btn-industrial-full {
+    width: 100%;
+    height: 70px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-industrial-full:hover {
+    background: #fff;
+}
+
+/* Футер формы */
+.auth-footer-industrial {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.auth-footer-industrial a {
+    color: var(--text);
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+/* Стили для выбора файла в регистрации */
+.industrial-file-input {
+    border: 1px dashed var(--border) !important;
+    padding: 15px !important;
+    cursor: pointer;
+}
+
+/* Сообщение об ошибке */
+.error-msg {
+    color: var(--accent);
+    font-weight: 900;
+    font-size: 0.7rem;
+    text-align: center;
+    border: 1px solid var(--accent);
+    padding: 10px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.compare-container {
+    border: 1px solid var(--border);
+    background: var(--border); /* Линии сетки через gap */
+    overflow-x: auto;
+}
+
+.compare-table-grid {
+    display: grid;
+    gap: 1px; /* Тонкие линии между всеми ячейками */
+    min-width: 1000px;
+}
+
+.compare-label-cell {
+    background: var(--surface);
+    padding: 20px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.compare-value-cell {
+    background: var(--bg);
+    padding: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.compare-value-cell.cell-photo {
+    height: 200px;
+}
+
+.compare-value-cell.cell-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(1);
+}
+
+.compare-value-cell:hover { background: var(--surface); }
+
+.highlight-price {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.data-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ровно 3 колонки в ряд */
+    gap: 10px;
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.spec-node { display: flex; flex-direction: column; gap: 4px; }
+.spec-label { font-size: 10px; font-weight: 800; color: var(--text-muted); }
+.spec-val { font-family: monospace; font-size: 13px; font-weight: 700; color: #fff; }
+
+/* ЦЕНА И СТРЕЛКА */
+.card-footer-industrial {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.price-block { display: flex; flex-direction: column; }
+.price-currency { font-size: 10px; font-weight: 900; color: var(--accent); margin-bottom: 2px; }
+.price-amount { font-size: 24px; font-weight: 900; color: #fff; line-height: 1; }
+
+.data-arrow { font-size: 20px; opacity: 0.3; transition: 0.3s; }
+.industrial-card:hover .data-arrow { opacity: 1; color: var(--accent); transform: translateX(5px); }
+
+
+
+/* --- REFINED DESCRIPTION STYLES --- */
+/* =========================================
+   СТИЛИ ДЛЯ ОПИСАНИЯ (DATA SHEET)
+   ========================================= */
+
+   .description-data-sheet {
+    position: relative;
+    margin-top: 60px;
+    padding: 20px 0;
+    overflow: hidden; /* Чтобы цифра не вылезала за края */
+}
+
+/* Огромная цифра ID на фоне */
+.data-sheet-bg-number {
+    position: absolute;
+    top: 0;
+    right: -10px;
+    font-size: 22rem;
+    font-weight: 900;
+    color: var(--text);
+    opacity: 0.04; /* Едва заметная тень */
+    line-height: 1;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.data-sheet-header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+/* Сама рамка с текстом */
+.data-sheet-body {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.01); /* Почти прозрачная подложка */
+    border: 1px solid var(--border);
+}
+
+/* Уголки (скобки) */
+.tech-bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent);
+}
+.tech-bracket.top-left { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+.tech-bracket.bottom-right { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+/* Текст описания */
+.data-text-wrapped {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text);
+}
+
+/* Маркеры [START] и [END] */
+.data-marker {
+    display: block;
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    margin: 15px 0;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   СТИЛИ ДЛЯ VIN ОТЧЕТА (VIN_CHECK)
+   ========================================= */
+
+.vin-report-box-industrial {
+    margin-top: 40px;
+    padding: 35px;
+    border: 1px dashed var(--border); /* Пунктирная "техническая" рамка */
+    background: rgba(0, 255, 102, 0.01); /* Тонкий зеленый оттенок */
+}
+
+.vin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.vin-header h3 {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.status-verified {
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: #00FF66; /* Зеленый текст */
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+/* Сетка отчета (теперь в 2 колонки) */
+.vin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 40px;
+}
+
+.vin-item {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+}
+
+/* Значения OK и цифры */
+.vin-item b {
+    color: #00FF66; /* Зеленый цвет для статуса */
+    font-family: monospace;
+    font-size: 0.85rem;
+}
+
+/* Адаптивность для мобилок */
+@media (max-width: 600px) {
+    .vin-grid { grid-template-columns: 1fr; }
+    .data-sheet-body { padding: 25px; }
+    .data-sheet-bg-number { font-size: 12rem; }
+}
+
+
+.asset-text-list {
+    display: grid;
+    /* Создаем 3 колонки. На средних экранах 2, на маленьких 1 */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 1px; /* Тонкая линия разделителя */
+    background: var(--border); /* Линии через фон */
+    border: 1px solid var(--border);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.asset-text-item {
+    background: var(--bg);
+    padding: 15px 20px;
+    cursor: pointer;
+    display: block; /* Важно для кликабельности всей области */
+    transition: 0.2s ease;
+}
+
+/* Скрываем стандартный чекбокс */
+.asset-text-item input[type="checkbox"] {
+    display: none;
+}
+
+.asset-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none; /* Чтобы текст не мешал клику на label */
+}
+
+.file-name {
+    font-family: monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text);
+    /* Обрезаем слишком длинные имена файлов */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 15px;
+}
+
+.file-status {
+    font-family: monospace;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    flex-shrink: 0; /* Чтобы статус не сжимался */
+}
+
+/* Эффект при наведении */
+.asset-text-item:hover {
+    background: var(--surface);
+}
+
+/* СТИЛЬ ПРИ ВЫБОРЕ (АКЦЕНТ) */
+.asset-text-item:has(input:checked) {
+    background: var(--accent) !important;
+}
+
+.asset-text-item:has(input:checked) .file-name,
+.asset-text-item:has(input:checked) .file-status {
+    color: #000 !important;
+    opacity: 1;
+}
+
+/* Кастомный скроллбар для списка файлов */
+.asset-text-list::-webkit-scrollbar { width: 4px; }
+.asset-text-list::-webkit-scrollbar-track { background: #000; }
+.asset-text-list::-webkit-scrollbar-thumb { background: var(--border); }
+.asset-text-list::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Стилизация скроллбара */
+.asset-text-list::-webkit-scrollbar { width: 4px; }
+.asset-text-list::-webkit-scrollbar-thumb { background: var(--accent); }
+
+@media (max-width: 1000px) {
+    .asset-text-list { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .asset-text-list { grid-template-columns: 1fr; }
+}

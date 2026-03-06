@@ -1,0 +1,62 @@
+<?php
+session_start();
+require_once 'db.php';
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = trim($_POST['login']);
+    $password = $_POST['password'];
+
+    $res = pg_query_params($conn, "SELECT * FROM users WHERE login = $1", [$login]);
+    $user = pg_fetch_assoc($res);
+
+    if ($user && password_verify($password, $user['password'])) {
+        $_SESSION['user'] = $user;
+        header("Location: index.php"); exit;
+    } else {
+        $error = "INVALID CREDENTIALS ACCESS DENIED";
+    }
+
+    if ($user && password_verify($password, $user['password'])) {
+    // ПРОВЕРКА БЛОКИРОВКИ
+    if ($user['is_blocked'] === 't') {
+        $error = "YOUR ACCOUNT IS TERMINATED ACCESS DENIED";
+    } else {
+        $_SESSION['user'] = $user;
+        header("Location: index.php"); exit;
+    }
+}
+}
+require_once 'header.php';
+?>
+
+<main class="wrap page-auth">
+    <div class="auth-box-industrial">
+        <div class="admin-status-line"></div>
+        <h1>USER <span>LOGIN</span></h1>
+        
+        <?php if ($error) echo "<p class='error-msg'>$error</p>"; ?>
+        
+        <form method="POST" class="industrial-form">
+            <div class="input-unit">
+                <label>IDENTIFIER</label>
+                <input type="text" name="login" placeholder="ENTER LOGIN" required>
+            </div>
+
+            <div class="input-unit">
+                <label>PASSWORD</label>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-industrial-full">
+                AUTHORIZE
+            </button>
+        </form>
+
+        <div class="auth-footer-industrial">
+            <p>Нет аккаунта? <a href="register.php">Зарегистрироваться</a></p>
+        </div>
+    </div>
+</main>
+
+<?php require_once 'footer.php'; ?>
