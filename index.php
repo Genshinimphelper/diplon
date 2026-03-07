@@ -43,25 +43,25 @@ require_once 'header.php';
     <div class="wrap stats-grid">
         <!-- Блок 1 -->
         <div class="stat-node">
-            <span class="stat-index">01 //</span>
+            <span class="stat-index"></span>
             <div class="stat-title"><?= $txt['st_1_h'] ?></div>
             <p class="stat-text"><?= $txt['st_1_p'] ?></p>
         </div>
         <!-- Блок 2 -->
         <div class="stat-node">
-            <span class="stat-index">02 //</span>
+            <span class="stat-index"></span>
             <div class="stat-title"><?= $txt['st_2_h'] ?></div>
             <p class="stat-text"><?= $txt['st_2_p'] ?></p>
         </div>
         <!-- Блок 3 -->
         <div class="stat-node">
-            <span class="stat-index">03 //</span>
+            <span class="stat-index"></span>
             <div class="stat-title"><?= $txt['st_3_h'] ?></div>
             <p class="stat-text"><?= $txt['st_3_p'] ?></p>
         </div>
         <!-- Блок 4 -->
         <div class="stat-node">
-            <span class="stat-index">04 //</span>
+            <span class="stat-index"></span>
             <div class="stat-title"><?= $txt['st_4_h'] ?></div>
             <p class="stat-text"><?= $txt['st_4_p'] ?></p>
         </div>
@@ -85,7 +85,7 @@ require_once 'header.php';
         
         <!-- TRADE-IN -->
         <div class="form-card-industrial">
-            <div class="card-tag"> <?= $txt['tag_valuation'] ?></div>
+            <div class="card-tag"></div>
             <h2><?= $txt['form_tradein_h'] ?></h2>
             <form action="process_leads.php?type=evaluate" method="POST" class="inner-form-industrial">
                 <div class="form-group-industrial">
@@ -115,7 +115,7 @@ require_once 'header.php';
 
         <!-- TEST DRIVE -->
         <div class="form-card-industrial">
-            <div class="card-tag"> <?= $txt['tag_logistics'] ?></div>
+            <div class="card-tag"></div>
             <h2><?= $txt['form_testdrive_h'] ?></h2>
             <form action="process_leads.php?type=testdrive" method="POST" class="inner-form-industrial">
                 <div class="form-group-industrial">
@@ -130,7 +130,7 @@ require_once 'header.php';
                 </div>
                 
                 <div class="form-group-industrial">
-                    <label>DATE</label>
+                    <label>Дата</label>
                     <input type="date" name="drive_date" required>
                 </div>
 
@@ -150,7 +150,7 @@ require_once 'header.php';
     <section class="wrap">
         <div class="calc-panel-refined">
             <div class="calc-inputs-side">
-                <div class="card-tag"> FINANCE</div>
+                <div class="card-tag"> </div>
                 <h2><?= $txt['calc_h'] ?></h2>
                 <div style="margin-top:40px;">
                     <label><?= $txt['calc_p'] ?>: <span id="p-val">2 500 000</span> ₽</label>

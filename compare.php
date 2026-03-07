@@ -34,7 +34,7 @@ require_once 'header.php';
 
 <main class="wrap page-compare">
     <header class="section-header-huge" style="margin-top:60px;">
-        <div class="admin-status-line">ANALYTICS COMPARISON_MODE</div>
+        <div class="admin-status-line"></div>
         <h1><?= $txt['comp_h'] ?></h1>
         <p style="color: var(--text-muted); margin-top: 10px;">
             <?= count($cars) ?> / 4 ОБЪЕКТА В СРАВНЕНИИ

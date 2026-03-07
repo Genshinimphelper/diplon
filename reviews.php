@@ -40,7 +40,7 @@ require_once 'header.php';
 <main class="wrap page-reviews">
     <!-- ЗАГОЛОВОК СТРАНИЦЫ -->
     <header class="section-header-huge" style="margin-top: 60px;">
-        <div class="admin-status-line">FEEDBACK VERIFIED OWNERS PUBLIC_RECORDS</div>
+        <div class="admin-status-line"></div>
         <h1><?= $txt['rev_title'] ?></h1>
         <p><?= $txt['rev_subtitle'] ?></p>
     </header>
@@ -49,7 +49,7 @@ require_once 'header.php';
     <div class="reviews-grid-industrial">
         <?php if (empty($reviews)): ?>
             <div style="grid-column: 1/-1; text-align: center; padding: 100px; border: 1px dashed var(--border); color: var(--text-muted);">
-                NO PUBLISHED REVIEWS YET
+                Нет опубликованых отзывовы
             </div>
         <?php else: ?>
             <?php foreach ($reviews as $rev): ?>
@@ -129,7 +129,7 @@ require_once 'header.php';
             <!-- ПРЕДЛОЖЕНИЕ ВОЙТИ -->
             <div style="text-align:center; padding: 80px; border: 1px dashed var(--border); background: rgba(255,255,255,0.02);">
                 <p style="color: var(--text-muted); font-weight: 800; letter-spacing: 1px;">
-                    <a href="login.php" style="color: var(--accent); text-decoration: underline;">AUTHORIZE</a> TO LEAVE A REVIEW.
+                    <a href="login.php" style="color: var(--accent); text-decoration: underline;">AUTHORIZE</a> чтобы оставить отзыв
                 </p>
             </div>
         <?php endif; ?>

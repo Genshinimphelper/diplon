@@ -59,7 +59,7 @@ require_once 'header.php';
             <!-- Заголовок страницы -->
             <header class="form-header-industrial">
                 <div style="font-size: 0.6rem; color: var(--accent); font-weight: 900; letter-spacing: 3px; margin-bottom: 10px;">
-                    SERVICE  TRADE-IN VALUATION
+                   
                 </div>
                 <h1><?= $txt['eval_h'] ?></h1>
                 <p><?= $txt['eval_p'] ?></p>

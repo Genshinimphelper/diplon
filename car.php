@@ -110,8 +110,8 @@ require_once 'header.php';
             <!-- VIN REPORT BOX (DECORATIVE) -->
             <div class="vin-report-box-industrial">
                 <div class="vin-header">
-                    <h3>HISTORY_REPORT VIN_CHECK</h3>
-                    <span class="status-verified">VERIFIED BY AUTOMARKET</span>
+                    <h3>VIN проверка</h3>
+                    <span class="status-verified">Проверка от AUTOMARKET</span>
                 </div>
                 <div class="vin-grid">
                     <div class="vin-item"> ЮР. ЧИСТОТА: <b>OK</b></div>
