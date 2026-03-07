@@ -2984,3 +2984,138 @@ select {
     .banner h1 { font-size: 2.2rem !important; }
     .display-value, .result-amount { font-size: 2.5rem !important; }
 }
+
+/* =========================================
+   ТЕХНИЧЕСКИЙ ФИКС МОБИЛЬНОЙ ВЕРСИИ
+   ========================================= */
+
+@media (max-width: 768px) {
+    /* 1. ИСПРАВЛЯЕМ ШАПКУ (HEADER) */
+    .site-header {
+        height: auto !important; /* Убираем фиксированную высоту */
+        padding: 10px 0;
+    }
+
+    .header-inner {
+        display: flex !important;
+        flex-direction: column !important; /* Элементы один под другим */
+        gap: 15px;
+        align-items: center;
+    }
+
+    /* Логотип всегда сверху */
+    .main-logo-group {
+        order: 1;
+    }
+
+    /* Навигация (Каталог, Трейд-ин) - делаем в ряд мелким шрифтом */
+    .main-nav {
+        display: flex !important;
+        order: 3;
+        gap: 15px;
+        justify-content: center;
+    }
+    .nav-link {
+        font-size: 0.6rem !important;
+    }
+
+    /* Утилиты (Языки, Тема, Админка) */
+    .header-utilities {
+        order: 2;
+        width: 100%;
+        justify-content: center !important;
+        gap: 10px !important;
+        border-top: 1px solid var(--border);
+        padding-top: 10px;
+    }
+
+    .controls-bundle {
+        border-right: none !important;
+        padding-right: 0 !important;
+    }
+
+    .user-block-industrial {
+        font-size: 0.7rem;
+    }
+
+    /* 2. ИСПРАВЛЯЕМ ЗАГОЛОВОК (BANNER) */
+    .banner {
+        padding: 60px 0 40px !important;
+        text-align: center;
+    }
+
+    .banner h1 {
+        font-size: 2.2rem !important; /* Уменьшаем в 3 раза */
+        line-height: 1.1 !important;
+        letter-spacing: -1px !important;
+        -webkit-text-stroke: 0.5px var(--text) !important; /* Тоньше обводка */
+    }
+
+    .banner p {
+        font-size: 0.9rem !important;
+        margin-bottom: 30px !important;
+    }
+
+    /* 3. ИСПРАВЛЯЕМ ФИЛЬТР */
+    .quick-filter-wrapper {
+        margin-top: 0 !important; /* Убираем наложение на текст */
+    }
+
+    .qf-form-industrial {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .qf-group {
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+        padding: 15px 20px !important;
+    }
+
+    .btn-search-industrial {
+        height: 60px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* 4. ОБЩИЕ ОТСТУПЫ */
+    .wrap {
+        padding: 0 15px !important;
+    }
+
+    /* 5. ИСПРАВЛЯЕМ КАРТОЧКИ (чтобы не были на весь экран) */
+    .car-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .industrial-card {
+        border: 1px solid var(--border) !important;
+        margin-bottom: 10px;
+    }
+
+    /* 6. ФИКС СТАТИСТИКИ */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr !important; /* 2 в ряд */
+    }
+    .stat-node {
+        padding: 30px 10px !important;
+    }
+    .stat-val {
+        font-size: 2rem !important;
+    }
+}
+
+/* Фикс для очень маленьких экранов */
+@media (max-width: 480px) {
+    .header-utilities {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .admin-btn-accent {
+        padding: 4px 8px !important;
+        font-size: 0.55rem !important;
+    }
+}
