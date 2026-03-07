@@ -3,7 +3,7 @@ session_start();
 require_once 'db.php';
 require_once 'auth.php';
 require_once 'lang.php';
-
+requireStaff();
 // Доступ разрешен и админу, и менеджеру
 requireLogin();
 if (!isAdmin() && $_SESSION['user']['role'] !== 'manager') {
