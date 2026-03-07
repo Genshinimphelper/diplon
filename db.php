@@ -1,9 +1,9 @@
 <?php
-$host = "localhost";
+$host = "postgresql-diplon.alwaysdata.net";
 $port = "5432";
-$dbname = "car4"; 
-$user = "postgres";
-$password = "1538";
+$dbname = "diplon_db"; 
+$user = "diplon";
+$password = "qazplm1538";
 
 $conn = pg_connect("host=$host port=$port dbname=$dbname user=$user password=$password");
 

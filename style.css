@@ -2862,3 +2862,125 @@ select {
 @media (max-width: 600px) {
     .asset-text-list { grid-template-columns: 1fr; }
 }
+
+/* =========================================
+   ФИНАЛЬНАЯ АДАПТАЦИЯ (MOBILE & TABLET)
+   ========================================= */
+
+@media (max-width: 1024px) {
+    /* Ограничиваем отступы по бокам */
+    .wrap { padding: 0 20px; }
+
+    /* Сетка машин: 2 в ряд на планшетах */
+    .car-grid, .protocol-grid-industrial {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Статистика: 2х2 */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Калькулятор: в колонку */
+    .calc-panel-refined, .detail-layout, .industrial-grid-2 {
+        grid-template-columns: 1fr !important;
+    }
+
+    .calc-result-side {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 40px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* ШАПКА: Логотип и утилиты, навигацию скрываем для чистоты (или в скролл) */
+    .header-inner {
+        display: flex;
+        justify-content: space-between;
+    }
+    .main-nav {
+        display: none; /* Прячем меню, чтобы не накладывалось */
+    }
+    .header-utilities {
+        gap: 10px;
+    }
+    .controls-bundle {
+        padding-right: 10px;
+        gap: 10px;
+    }
+
+    /* БАННЕР: Уменьшаем гигантский текст */
+    .banner { padding: 100px 0 60px; }
+    .banner h1 { font-size: 2.8rem !important; }
+    .banner p { font-size: 1rem; }
+
+    /* ФИЛЬТР: Поля друг под другом */
+    .qf-form-industrial, .qf-form-industrial-catalog {
+        grid-template-columns: 1fr !important;
+    }
+    .qf-group {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+    }
+    .btn-search-industrial, .btn-catalog-search {
+        height: 60px !important;
+    }
+
+    /* СТАТИСТИКА: В одну колонку */
+    .stat-node {
+        padding: 40px 20px;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+    }
+
+    /* КАРТОЧКИ: 1 в ряд для удобства клика */
+    .car-grid, .protocol-grid-industrial, .protocol-list-industrial, .reviews-grid-industrial {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* СТРАНИЦА АВТО: Галерея и Инфо */
+    .main-visual-stage { aspect-ratio: 4/3; }
+    .info-header h1 { font-size: 2.5rem !important; }
+    .price-line { font-size: 2rem !important; }
+    .sticky-info-card { position: static !important; padding: 25px; }
+
+    /* ФОРМЫ (Trade-in, Кредит, Админка) */
+    .industrial-form-grid, .form-container-industrial {
+        grid-template-columns: 1fr !important;
+        padding: 30px 20px !important;
+    }
+    .form-col, .form-full { grid-column: span 1 !important; }
+
+    /* ФУТЕР: Плотная вертикальная сетка */
+    .footer-main-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+    }
+    .footer-bottom-panel {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .footer-disclaimer { text-align: center; }
+
+    /* ТАБЛИЦЫ АДМИНКИ: Включаем горизонтальный скролл, чтобы не сжимались */
+    .table-scroll-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .admin-table {
+        min-width: 600px; /* Таблица сохранит читаемость */
+    }
+
+    /* СРАВНЕНИЕ */
+    .compare-table-grid {
+        grid-template-columns: 120px repeat(auto-fit, minmax(200px, 1fr)) !important;
+    }
+}
+
+/* Фикс для очень маленьких экранов (iPhone SE и др) */
+@media (max-width: 380px) {
+    .banner h1 { font-size: 2.2rem !important; }
+    .display-value, .result-amount { font-size: 2.5rem !important; }
+}
