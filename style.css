@@ -3119,3 +3119,64 @@ select {
         font-size: 0.55rem !important;
     }
 }
+
+/* --- ОБНОВЛЕННЫЙ БЛОК СТАНДАРТОВ --- */
+.stats-stripe {
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.stat-node {
+    padding: 60px 40px;
+    border-right: 1px solid var(--border);
+    text-align: left; /* Переключаем на левый край для серьезности */
+    transition: var(--transition);
+}
+
+.stat-node:last-child { border-right: none; }
+.stat-node:hover { background: var(--surface); }
+
+/* Маленький индекс в углу (01 //) */
+.stat-index {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 20px;
+    font-weight: 900;
+}
+
+/* Заголовок принципа */
+.stat-title {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+/* Описание принципа */
+.stat-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-node:nth-child(2n) { border-right: none; }
+    .stat-node { border-bottom: 1px solid var(--border); }
+}
+
+@media (max-width: 600px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat-node { border-right: none; }
+}

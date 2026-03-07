@@ -128,7 +128,13 @@ $languages = [
 'u_status' => 'СТАТУС',
 'u_action' => 'ДЕЙСТВИЕ',
 'btn_block' => 'БЛОКИРОВАТЬ',
-'btn_unblock' => 'РАЗБЛОКИРОВАТЬ',
+'btn_unblock' => 'РАЗБЛОКИРОВАТЬ', 'st_1_p' => 'Полная история владения и обслуживания.',
+'st_2_h' => 'ВАЛИДАЦИЯ',
+'st_2_p' => 'Проверка каждого объекта экспертом.',
+'st_3_h' => 'БЕЗОПАСНОСТЬ',
+'st_3_p' => 'Шифрование данных и чистота сделки.',
+'st_4_h' => 'СКОРОСТЬ',
+'st_4_p' => 'Обработка заявок в режиме реального времени.',
     ],
     'en' => [
         'nav_catalog' => 'Inventory', 'nav_tradein' => 'Trade-in', 'nav_login' => 'Login', 'nav_join' => 'Join', 'nav_admin' => 'Admin', 'nav_profile' => 'Profile', 'nav_exit' => 'Logout',
@@ -251,7 +257,14 @@ $languages = [
 'u_status' => 'STATUS',
 'u_action' => 'ACTION',
 'btn_block' => 'BLOCK',
-'btn_unblock' => 'UNBLOCK',
+'btn_unblock' => 'UNBLOCK', 'st_1_h' => 'TRANSPARENCY',
+'st_1_p' => 'Full ownership and service history.',
+'st_2_h' => 'VALIDATION',
+'st_2_p' => 'Expert verification of every unit.',
+'st_3_h' => 'SECURITY',
+'st_3_p' => 'Data encryption and legal safety.',
+'st_4_h' => 'EFFICIENCY',
+'st_4_p' => 'Real-time application processing.',
     ]
 ];
 if (isset($_GET['lang']) && array_key_exists($_GET['lang'], $languages)) $_SESSION['lang'] = $_GET['lang'];

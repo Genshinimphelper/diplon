@@ -39,14 +39,34 @@ require_once 'header.php';
     </section>
 
     <!-- STATS -->
-    <section class="stats-stripe">
-        <div class="wrap stats-grid">
-            <div class="stat-node"><div class="stat-val" data-target="10">0</div><div class="stat-lbl"><?= $txt['stat_1'] ?></div></div>
-            <div class="stat-node"><div class="stat-val" data-target="1200">0</div><div class="stat-lbl"><?= $txt['stat_2'] ?></div></div>
-            <div class="stat-node"><div class="stat-val" data-target="100">0</div><div class="stat-lbl"><?= $txt['stat_3'] ?></div></div>
-            <div class="stat-node"><div class="stat-val" data-target="24">0</div><div class="stat-lbl"><?= $txt['stat_4'] ?></div></div>
+<section class="stats-stripe">
+    <div class="wrap stats-grid">
+        <!-- Блок 1 -->
+        <div class="stat-node">
+            <span class="stat-index">01 //</span>
+            <div class="stat-title"><?= $txt['st_1_h'] ?></div>
+            <p class="stat-text"><?= $txt['st_1_p'] ?></p>
         </div>
-    </section>
+        <!-- Блок 2 -->
+        <div class="stat-node">
+            <span class="stat-index">02 //</span>
+            <div class="stat-title"><?= $txt['st_2_h'] ?></div>
+            <p class="stat-text"><?= $txt['st_2_p'] ?></p>
+        </div>
+        <!-- Блок 3 -->
+        <div class="stat-node">
+            <span class="stat-index">03 //</span>
+            <div class="stat-title"><?= $txt['st_3_h'] ?></div>
+            <p class="stat-text"><?= $txt['st_3_p'] ?></p>
+        </div>
+        <!-- Блок 4 -->
+        <div class="stat-node">
+            <span class="stat-index">04 //</span>
+            <div class="stat-title"><?= $txt['st_4_h'] ?></div>
+            <p class="stat-text"><?= $txt['st_4_p'] ?></p>
+        </div>
+    </div>
+</section>
 
     <!-- POPULAR -->
     <section class="section-cars">
