@@ -119,10 +119,10 @@ require_once 'header.php';
             <div class="input-unit">
                 <label>BODY TYPE</label>
                 <select name="body_type">
-                    <option value="sedan">СЕДАН // SEDAN</option>
-                    <option value="suv">ВНЕДОРОЖНИК // SUV</option>
-                    <option value="coupe">КУПЕ // COUPE</option>
-                    <option value="wagon">УНИВЕРСАЛ // WAGON</option>
+                    <option value="sedan">СЕДАН</option>
+                    <option value="suv">ВНЕДОРОЖНИК</option>
+                    <option value="coupe">КУПЕ</option>
+                    <option value="wagon">УНИВЕРСАЛ</option>
                 </select>
             </div>
 
@@ -178,7 +178,7 @@ require_once 'header.php';
                             <input type="checkbox" name="selected_assets[]" value="<?= $file ?>">
                             <div class="asset-item-content">
                                 <span class="file-name"><?= $file ?></span>
-                                <span class="file-status">// READY</span>
+                                <span class="file-status"> ГОТОВО!</span>
                             </div>
                         </label>
                     <?php endforeach; ?>
