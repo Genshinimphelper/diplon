@@ -83,11 +83,11 @@ if (isset($_SESSION['user'])) {
             
             <div class="controls-bundle">
                 <!-- Переключатель языков -->
-                <div class="lang-switch-mini">
+                <!-- <div class="lang-switch-mini">
                     <a href="?lang=ru" class="<?= $ln == 'ru' ? 'active' : '' ?>">RU</a>
                     <a href="?lang=en" class="<?= $ln == 'en' ? 'active' : '' ?>">EN</a>
                 </div>
-                
+                 -->
                 <!-- Переключатель тем (3 состояния) -->
                 <button id="theme-toggle" class="theme-btn-minimal" title="Switch Theme">🌓</button>
             </div>
