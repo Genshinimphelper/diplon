@@ -33,7 +33,7 @@ require_once 'header.php';
 <main class="wrap page-auth">
     <div class="auth-box-industrial">
         <div class="admin-status-line"></div>
-        <h1>USER <span>LOGIN</span></h1>
+        <h1>ВХОД <span>В АККАУНТ</span></h1>
         
         <?php if ($error) echo "<p class='error-msg'>$error</p>"; ?>
         
@@ -49,7 +49,7 @@ require_once 'header.php';
             </div>
 
             <button type="submit" class="btn-industrial-full">
-                AUTHORIZE
+                ВОЙТИ
             </button>
         </form>
 

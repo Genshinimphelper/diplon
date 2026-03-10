@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
 
         if ($res) {
-            $msg = "REGISTRATION COMPLETE. <a href='login.php'>LOGIN //</a>";
+            $msg = "REGISTRATION COMPLETE. <a href='login.php'>LOGIN</a>";
         } else {
             $error = "USER ALREADY EXISTS // TERMINATED";
         }
@@ -37,7 +37,7 @@ require_once 'header.php';
 <main class="wrap page-auth">
     <div class="auth-box-industrial">
         <div class="admin-status-line"></div>
-        <h1>CREATE <span>ACCOUNT</span></h1>
+        <h1>СОЗДАНИЕ <span>АККАУНТА</span></h1>
         
         <?php 
             if ($error) echo "<p class='error-msg'>$error</p>"; 
@@ -66,7 +66,7 @@ require_once 'header.php';
             </div>
 
             <button type="submit" class="btn-industrial-full">
-                CREATE
+                СОЗДАТЬ
             </button>
         </form>
 
