@@ -3180,3 +3180,137 @@ select {
     .stats-grid { grid-template-columns: 1fr; }
     .stat-node { border-right: none; }
 }
+
+/* --- ФИКС КНОПКИ ПОИСКА В КАТАЛОГЕ --- */
+.qf-form-industrial-catalog {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 180px; 
+    align-items: stretch; /* Растягивает кнопку на всю высоту ряда */
+    background: var(--border);
+    gap: 1px;
+    border: 1px solid var(--border);
+}
+
+.qf-form-industrial-catalog .qf-group {
+    background: var(--surface);
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Выравнивает инпуты по нижней линии */
+}
+
+.btn-catalog-search {
+    background: var(--accent) !important;
+    color: #000 !important;
+    border: none !important;
+    height: 100% !important; /* Принудительно на всю высоту */
+    margin: 0 !important;
+    padding: 0 30px !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Убираем "визуальный прыжок" */
+    align-self: stretch; 
+}
+
+/* Если кнопка стоит в блоке с заголовком (label) на одном уровне в HTML */
+.qf-form-industrial-catalog button {
+    grid-row: 1; /* Гарантируем, что кнопка в том же ряду */
+}
+
+/* =========================================
+   ROBUST MOBILE ADAPTATION
+   ========================================= */
+
+@media (max-width: 1024px) {
+    .wrap { padding: 0 20px; }
+    .car-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .calc-industrial, .detail-layout, .industrial-grid-2 { 
+        grid-template-columns: 1fr !important; 
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* --- ШАПКА (HEADER) --- */
+    .site-header {
+        height: auto !important;
+        padding: 15px 0;
+    }
+    .header-inner {
+        flex-direction: column; /* Элементы в колонку */
+        gap: 15px;
+        display: flex !important;
+    }
+    .main-nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    .header-utilities {
+        width: 100%;
+        justify-content: center;
+        border-top: 1px solid var(--border);
+        padding-top: 15px;
+    }
+
+    /* --- БАННЕР (BANNER) --- */
+    .banner { padding: 80px 0 40px !important; text-align: center; }
+    .banner h1 { 
+        font-size: 2.5rem !important; /* Уменьшаем гигантский шрифт */
+        line-height: 1.1;
+    }
+    .banner h1 span { -webkit-text-stroke: 0.5px var(--text); } /* Тоньше обводка */
+
+    /* --- ФИЛЬТРЫ --- */
+    .quick-filter-wrapper { margin-top: 0 !important; }
+    .qf-form-industrial, .qf-form-industrial-catalog {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .qf-group {
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+    }
+    .btn-search-industrial, .btn-catalog-search {
+        width: 100% !important;
+        height: 60px !important;
+    }
+
+    /* --- КАРТОЧКИ --- */
+    .car-grid { grid-template-columns: 1fr !important; }
+    .industrial-card { border-bottom: 1px solid var(--border); }
+
+    /* --- СТАТИСТИКА (СТАНДАРТЫ) --- */
+    .stats-grid { grid-template-columns: 1fr !important; }
+    .stat-node {
+        border-right: none !important;
+        border-bottom: 1px solid var(--border);
+        padding: 30px 20px !important;
+    }
+
+    /* --- СТРАНИЦА АВТО (CAR.PHP) --- */
+    .detail-grid { grid-template-columns: 1fr !important; }
+    .info-header h1 { font-size: 2.2rem !important; }
+    .price-line { font-size: 1.8rem !important; }
+    .sticky-info-card { position: static !important; }
+    
+    /* Сравнение */
+    .compare-table-container { overflow-x: auto; }
+    .compare-table-grid {
+        grid-template-columns: 100px repeat(auto-fill, minmax(180px, 1fr)) !important;
+    }
+}
+
+/* Для очень маленьких телефонов */
+@media (max-width: 480px) {
+    .banner h1 { font-size: 2rem !important; }
+    .logo { font-size: 1rem; }
+    .display-value, .result-amount { font-size: 2.5rem !important; }
+}
