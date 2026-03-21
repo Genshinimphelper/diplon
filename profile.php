@@ -43,6 +43,42 @@ require_once 'header.php';
             ?>
         </div>
     </section>
+    <!-- Вставь это в profile.php после секции Избранного -->
+<section class="profile-section" style="margin-top: 80px;">
+    <div class="admin-status-line">USER_RESERVATIONS ACTIVE_SESSIONS</div>
+    <h2 class="description-title"><?= $txt['nav_my_bookings'] ?></h2>
+
+    <div class="car-grid">
+        <?php
+        $res_book = pg_query_params($conn, "
+            SELECT c.*, b.name as brand, bk.created_at as book_date, bk.status as book_status
+            FROM bookings bk
+            JOIN cars c ON c.id = bk.car_id
+            JOIN brands b ON b.id = c.brand_id
+            WHERE bk.user_id = $1 ORDER BY bk.created_at DESC", [$user['id']]);
+        
+        $my_bookings = pg_fetch_all($res_book);
+        
+        if ($my_bookings):
+            foreach ($my_bookings as $car): ?>
+                <div class="industrial-card">
+                    <div class="card-visual">
+                        <img src="images/<?= $car['image_main'] ?>" class="card-img">
+                        <div class="card-overlay-status"><span><?= strtoupper($car['book_status']) ?></span></div>
+                    </div>
+                    <div class="card-data">
+                        <h3 class="data-title"><?= $car['brand'] ?> <?= $car['model'] ?></h3>
+                        <p style="font-size: 0.7rem; color: var(--text-muted);">DATE: <?= date('d.m.Y', strtotime($car['book_date'])) ?></p>
+                        <a href="car.php?id=<?= $car['id'] ?>" class="view-all-link" style="margin-top: 15px; display: inline-block;">VIEW OBJECT</a>
+                    </div>
+                </div>
+            <?php endforeach;
+        else:
+            echo "<p class='muted'> NO ACTIVE RESERVATIONS FOUND.</p>";
+        endif;
+        ?>
+    </div>
+</section>
 </main>
 
 <?php require_once 'footer.php'; ?>

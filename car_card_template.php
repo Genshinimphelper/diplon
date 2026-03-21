@@ -31,7 +31,11 @@ if (isset($_SESSION['compare']) && in_array($car['id'], $_SESSION['compare'])) {
         <!-- ВИЗУАЛЬНЫЙ БЛОК (ФОТО) -->
         <div class="card-visual">
             <img src="<?= $img_path ?>" alt="<?= $full_title ?>" class="card-img" loading="lazy">
-            
+<?php if (isset($car['is_booked']) && $car['is_booked'] === 't'): ?>
+    <div class="card-overlay-status" style="background: rgba(0,0,0,0.6);">
+        <span style="color: #60a5fa; border-color: #60a5fa;">RESERVED</span>
+    </div>
+<?php endif; ?>
             <!-- Бейджи (слева) -->
             <div class="card-badges-left">
                 <?php if ($car['status'] !== 'active'): ?>

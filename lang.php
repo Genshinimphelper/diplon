@@ -135,7 +135,9 @@ $languages = [
 'st_3_h' => 'БЕЗОПАСНОСТЬ',
 'st_3_p' => 'Шифрование данных и чистота сделки.',
 'st_4_h' => 'СКОРОСТЬ',
-'st_4_p' => 'Обработка заявок в режиме реального времени.',
+'st_4_p' => 'Обработка заявок в режиме реального времени.', 'nav_my_bookings' => 'МОИ БРОНИРОВАНИЯ',
+'adm_bookings' => 'БРОНИРОВАНИЕ',
+'btn_cancel_booking' => 'ОТМЕНИТЬ БРОНЬ',
     ],
     'en' => [
         'nav_catalog' => 'Inventory', 'nav_tradein' => 'Trade-in', 'nav_login' => 'Login', 'nav_join' => 'Join', 'nav_admin' => 'Admin', 'nav_profile' => 'Profile', 'nav_exit' => 'Logout',
@@ -265,7 +267,9 @@ $languages = [
 'st_3_h' => 'SECURITY',
 'st_3_p' => 'Data encryption and legal safety.',
 'st_4_h' => 'EFFICIENCY',
-'st_4_p' => 'Real-time application processing.',
+'st_4_p' => 'Real-time application processing.', 'nav_my_bookings' => 'MY RESERVATIONS',
+'adm_bookings' => 'BOOKINGS',
+'btn_cancel_booking' => 'CANCEL RESERVATION',
     ]
 ];
 if (isset($_GET['lang']) && array_key_exists($_GET['lang'], $languages)) $_SESSION['lang'] = $_GET['lang'];

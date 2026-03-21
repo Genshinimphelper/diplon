@@ -3314,3 +3314,12 @@ select {
     .logo { font-size: 1rem; }
     .display-value, .result-amount { font-size: 2.5rem !important; }
 }
+
+/* Стили для заблокированной кнопки брони */
+.btn-industrial-full.disabled-btn {
+    background: #222 !important; /* Сделаем её темнее, чтобы было понятно, что она не активна */
+    color: #555 !important;
+    cursor: not-allowed;
+    margin-bottom: 30px; /* Добавляем отступ, чтобы не наезжала на паспорт */
+    border: 1px solid var(--border);
+}
