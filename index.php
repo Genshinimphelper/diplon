@@ -162,7 +162,7 @@ require_once 'header.php';
             <div class="calc-result-side">
                 <span style="font-size:0.7rem; color:var(--text-muted);"><?= $txt['calc_m'] ?></span>
                 <div class="result-amount" id="month">35 400</div>
-                <a href="credit_apply.php" id="apply-btn" class="btn-industrial-full" style="text-decoration:none; margin-top:20px;">REQUEST</a>
+                <a href="credit_apply.php" id="apply-btn" class="btn-industrial-full" style="text-decoration:none; margin-top:20px;">Отсавить заявку</a>
             </div>
         </div>
     </section>
@@ -175,15 +175,13 @@ require_once 'header.php';
         <!-- Контейнер бегущей строки -->
         <div class="status-marquee">
             <div class="marquee-content">
-                <span>STATUS: READY 100% OK SYSTEM STABLE NO ERRORS FOUND SCANNING COMPLETE </span>
-                <span>STATUS: READY 100% OK SYSTEM STABLE NO ERRORS FOUND SCANNING COMPLETE </span>
             </div>
         </div>
     </div>
     <div class="protocol-grid-industrial">
     <?php for($i=1; $i<=4; $i++): ?>
     <div class="prot-box">
-        <span class="prot-code">CODE: 0<?= $i ?>  AUDIT_SUCCESS</span>
+        
         <h3><?= $txt["prot_{$i}_h"] ?></h3>
         <p><?= $txt["prot_{$i}_p"] ?></p>
     </div>
