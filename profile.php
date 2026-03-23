@@ -20,12 +20,12 @@ require_once 'header.php';
         <div class="profile-meta">
             <span class="role-tag"><?= strtoupper($user['role']) ?> </span>
             <h1><?= htmlspecialchars($user['login']) ?></h1>
-            <a href="logout.php" class="logout-link">TERMINATE SESSION</a>
+            <a href="logout.php" class="logout-link">Добро пожаловать!</a>
         </div>
     </div>
 
     <section class="profile-favorites">
-        <h2>SAVED <span>OBJECTS</span></h2>
+        <h2>Избранные <span>машины</span></h2>
         <div class="car-grid">
             <?php
             $res = pg_query_params($conn, "
@@ -38,14 +38,14 @@ require_once 'header.php';
             if ($favs):
                 foreach ($favs as $car) include 'car_card_template.php';
             else:
-                echo "<p class='muted'>NO SAVED ITEMS FOUND.</p>";
+                echo "<p class='muted'>Вы ещё не добавлили машины.</p>";
             endif;
             ?>
         </div>
     </section>
     <!-- Вставь это в profile.php после секции Избранного -->
 <section class="profile-section" style="margin-top: 80px;">
-    <div class="admin-status-line">USER_RESERVATIONS ACTIVE_SESSIONS</div>
+    <div class="admin-status-line"></div>
     <h2 class="description-title"><?= $txt['nav_my_bookings'] ?></h2>
 
     <div class="car-grid">
@@ -74,7 +74,7 @@ require_once 'header.php';
                 </div>
             <?php endforeach;
         else:
-            echo "<p class='muted'> NO ACTIVE RESERVATIONS FOUND.</p>";
+            echo "<p class='muted'>Вы ещё не бронировали машины.</p>";
         endif;
         ?>
     </div>

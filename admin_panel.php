@@ -17,9 +17,9 @@ require_once 'header.php';
 <main class="wrap page-admin-hub">
     <header class="section-header-huge">
         <div class="admin-status-line">
-            SYSTEM ROLE: <?= strtoupper($_SESSION['user']['role']) ?> TERMINAL: ACTIVE
+            Системная роль: <?= strtoupper($_SESSION['user']['role']) ?> запущено!
         </div>
-        <h1>CONTROL <span>CENTER</span></h1>
+        <h1> <span></span></h1>
         <p>Интерфейс управления базой данных, клиентскими запросами и модерацией контента.</p>
     </header>
 
@@ -31,10 +31,10 @@ require_once 'header.php';
                 <span class="hub-icon">📞</span>
             </div>
             <div class="hub-body">
-                <h3>Leads & Calls</h3>
+                <h3>Звонки и заяки</h3>
                 <p>Запросы на обратный звонок по объектам из каталога</p>
             </div>
-            <div class="hub-footer">OPEN SYSTEM →</div>
+            <div class="hub-footer">Открыть →</div>
         </a>
 
         <!-- 02. КРЕДИТЫ -->
@@ -44,10 +44,10 @@ require_once 'header.php';
                 <span class="hub-icon">💳</span>
             </div>
             <div class="hub-body">
-                <h3>Financing</h3>
+                <h3>Финансы</h3>
                 <p>Кредитные анкеты и статусы банковских одобрений</p>
             </div>
-            <div class="hub-footer">OPEN SYSTEM →</div>
+            <div class="hub-footer">Открыть →</div>
         </a>
 
         <!-- 03. ТРЕЙД-ИН -->
@@ -60,7 +60,7 @@ require_once 'header.php';
                 <h3>Trade-In</h3>
                 <p>Оценка входящего парка автомобилей от клиентов</p>
             </div>
-            <div class="hub-footer">OPEN SYSTEM →</div>
+            <div class="hub-footer">Открыть →</div>
         </a>
 
         <!-- 04. ТЕСТ-ДРАЙВЫ -->
@@ -73,7 +73,7 @@ require_once 'header.php';
                 <h3>Test Drives</h3>
                 <p>Управление графиком заездов и бронированием времени</p>
             </div>
-            <div class="hub-footer">VIEW SCHEDULE →</div>
+            <div class="hub-footer">Открыть →</div>
         </a>
 
         <!-- 05. МОДЕРАЦИЯ ОТЗЫВОВ -->
@@ -83,10 +83,10 @@ require_once 'header.php';
                 <span class="hub-icon">💬</span>
             </div>
             <div class="hub-body">
-                <h3>Reviews</h3>
+                <h3>Отзывы</h3>
                 <p>Проверка и публикация отзывов клиентов</p>
             </div>
-            <div class="hub-footer">MODERATION QUEUE →</div>
+            <div class="hub-footer">Открыть страницу модерации →</div>
         </a>
         
         <a href="admin_inventory.php" class="hub-card">
@@ -95,10 +95,10 @@ require_once 'header.php';
         <span class="hub-icon">📦</span>
     </div>
     <div class="hub-body">
-        <h3>Stock Management</h3>
+        <h3>Машины</h3>
         <p>Редактирование параметров и безвозвратное удаление объектов</p>
     </div>
-    <div class="hub-footer">MANAGE INVENTORY →</div>
+    <div class="hub-footer">проверить каталог →</div>
 </a>
         <!-- 06. СКЛАД (Только для ADMIN) -->
         <?php if (isAdmin()): ?>
@@ -108,22 +108,22 @@ require_once 'header.php';
                 <span class="hub-icon">➕</span>
             </div>
             <div class="hub-body">
-                <h3>Add Unit</h3>
+                <h3>Регистрация новых Авто</h3>
                 <p>Регистрация нового автомобиля в реестре стока</p>
             </div>
-            <div class="hub-footer">DATABASE_UPDATE SEND →</div>
+            <div class="hub-footer">Открыть базу данных→</div>
         </a>
-        <!-- Замени 6-ю плитку (или добавь новую) в admin_panel.php -->
+
 <a href="admin_users.php" class="hub-card">
     <div class="hub-header">
         <span class="hub-num">06</span>
         <span class="hub-icon">👥</span>
     </div>
     <div class="hub-body">
-        <h3>User Management</h3>
+        <h3>Пользователи</h3>
         <p>Контроль уровней доступа, назначение ролей и блокировка аккаунтов</p>
     </div>
-    <div class="hub-footer">SECURITY_PROTOCOL</div>
+    <div class="hub-footer">Открыть меню ползователей</div>
 </a>
         <?php else: ?>
         <div class="hub-card placeholder">

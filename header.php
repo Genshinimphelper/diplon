@@ -105,7 +105,7 @@ if (isset($_SESSION['user'])) {
                         
                         <!-- Панель управления (видна Админу и Менеджеру) -->
                         <?php if (isStaff()): ?>
-                            <a href="admin_panel.php" class="admin-btn-accent">DASHBOARD</a>
+                            <a href="admin_panel.php" class="admin-btn-accent">Панель управления</a>
                         <?php endif; ?>
 
                         <!-- Иконка выхода -->
