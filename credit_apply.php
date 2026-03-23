@@ -1,8 +1,7 @@
 <?php
-// 1. Сначала запускаем сессию и подключаем файлы логики
 session_start();
 require_once 'db.php';
-require_once 'auth.php'; // ОБЯЗАТЕЛЬНО перед header.php, так как там используется isAdmin()
+require_once 'auth.php'; 
 require_once 'lang.php';
 
 // 2. Логика обработки формы
@@ -32,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// 3. Подключаем визуальную часть (шапку)
+
 require_once 'header.php';
 ?>
 
@@ -52,7 +51,6 @@ require_once 'header.php';
             
             <header style="margin-bottom: 40px;">
                 <div style="font-size: 0.6rem; color: var(--accent); font-weight: 900; letter-spacing: 3px; margin-bottom: 10px;">
-                    INDUSTRIAL FINANCING SYSTEM
                 </div>
                 <h1><?= $txt['credit_h'] ?></h1>
             </header>
@@ -80,19 +78,20 @@ require_once 'header.php';
                 <div class="input-unit">
                     <label><?= $txt['credit_term'] ?></label>
                     <select name="term">
-                        <option value="12">12 MONTHS (1 YEAR)</option>
-                        <option value="36">36 MONTHS (3 YEARS)</option>
-                        <option value="60" selected>60 MONTHS (5 YEARS)</option>
-                        <option value="84">84 MONTHS (7 YEARS)</option>
+                        <option value="12">12 Месяцев (1 Год)</option>
+                        <option value="36">36 Месяцев (3 Года)</option>
+                        <option value="60" selected>60 Месяцев (5 Лет)</option>
+                        <option value="84">84 Месяцев (7 Лет)</option>
                     </select>
                 </div>
 
                 <button type="submit" class="btn-industrial-full" style="margin-top: 20px;">
-                    <?= $txt['calc_btn'] ?> SEND
+                    <?= $txt['calc_btn'] ?> 
+                    
                 </button>
                 
                 <div style="margin-top: 30px; font-family: monospace; font-size: 0.55rem; color: #333; text-align: center; letter-spacing: 1px;">
-                    BY CLICKING SEND YOU AGREE TO DATA PROCESSING PROTOCOL
+                    При отркавки данных, Вы соглашаетесь с политиокой сайта
                 </div>
             </form>
         <?php endif; ?>
