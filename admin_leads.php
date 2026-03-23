@@ -55,16 +55,16 @@ require_once 'header.php';
 
 <main class="wrap page-admin">
     <header class="section-header-huge" style="margin-top:60px;">
-        <div class="admin-status-line">TERMINAL OPERATIONAL_CONTROL SESSION_ACTIVE</div>
-        <h1>LEAD <span>MANAGEMENT</span></h1>
+        <div class="admin-status-line"></div>
+        <h1>МЕнеджер <span>Заявок</span></h1>
         
         <!-- ВКЛАДКИ 01 - 05 -->
         <div class="admin-tabs-container">
             <a href="?type=callback" class="tab-link <?= $type == 'callback' ? 'active' : '' ?>">
-                <span class="tab-code">01</span> CALLS 
+                <span class="tab-code">01</span> Звонки 
             </a>
             <a href="?type=credit" class="tab-link <?= $type == 'credit' ? 'active' : '' ?>">
-                <span class="tab-code">02</span> FINANCE 
+                <span class="tab-code">02</span> Финансы 
             </a>
             <a href="?type=evaluate" class="tab-link <?= $type == 'evaluate' ? 'active' : '' ?>">
                 <span class="tab-code">03</span> TRADE-IN 
@@ -73,7 +73,7 @@ require_once 'header.php';
                 <span class="tab-code">04</span> TEST DRIVES 
             </a>
             <a href="?type=booking" class="tab-link <?= $type == 'booking' ? 'active' : '' ?>">
-                <span class="tab-code">05</span> BOOKINGS 
+                <span class="tab-code">05</span> Бронирование 
             </a>
         </div>
     </header>
@@ -86,11 +86,11 @@ require_once 'header.php';
                 <label>FILTER_BY_STATUS</label>
                 <select name="status" onchange="this.form.submit()">
                     <option value="all" <?= $status_filter == 'all' ? 'selected' : '' ?>>ВСЕ ОПЕРАЦИИ</option>
-                    <option value="new" <?= $status_filter == 'new' ? 'selected' : '' ?>>NEW (НОВЫЕ)</option>
-                    <option value="processing" <?= $status_filter == 'processing' ? 'selected' : '' ?>>WORK (В РАБОТЕ)</option>
-                    <option value="closed" <?= $status_filter == 'closed' ? 'selected' : '' ?>>DONE (ЗАКРЫТЫЕ)</option>
+                    <option value="new" <?= $status_filter == 'new' ? 'selected' : '' ?>>НОВЫЕ</option>
+                    <option value="processing" <?= $status_filter == 'processing' ? 'selected' : '' ?>>В РАБОТЕ</option>
+                    <option value="closed" <?= $status_filter == 'closed' ? 'selected' : '' ?>>ЗАКРЫТЫЕ</option>
                     <?php if($type === 'booking'): ?>
-                        <option value="pending" <?= $status_filter == 'pending' ? 'selected' : '' ?>>PENDING (ОЖИДАНИЕ)</option>
+                        <option value="pending" <?= $status_filter == 'pending' ? 'selected' : '' ?>>ОЖИДАНИЕ</option>
                     <?php endif; ?>
                 </select>
             </div>
@@ -102,15 +102,15 @@ require_once 'header.php';
         <table class="admin-table">
             <thead>
                 <?php if ($type === 'callback'): ?>
-                    <tr><th>DATE</th><th>PHONE</th><th>VEHICLE</th><th>STATUS</th><th>ACTIONS</th></tr>
+                    <tr><th>Дата</th><th>Номер телефона</th><th>Т.С.</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'credit'): ?>
-                    <tr><th>DATE</th><th>CLIENT</th><th>PHONE</th><th>AMOUNT</th><th>STATUS</th><th>ACTIONS</th></tr>
+                    <tr><th>Дата</th><th>Клиент</th><th>Номер телефона</th><th>Сумма</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'evaluate'): ?>
-                    <tr><th>DATE</th><th>CLIENT CAR</th><th>YEAR/KM</th><th>PHONE</th><th>STATUS</th><th>ACTIONS</th></tr>
+                    <tr><th>Дата</th><th>Т.С. клиента</th><th>Год/KM</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'testdrive'): ?>
-                    <tr><th>DATE</th><th>VEHICLE</th><th>DRIVE DATE</th><th>PHONE</th><th>STATUS</th><th>ACTIONS</th></tr>
+                    <tr><th>Дата</th><th>Т.С.</th><th>DRIVE DATE</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'booking'): ?>
-                    <tr><th>DATE</th><th>CLIENT</th><th>VEHICLE</th><th>PHONE</th><th>STATUS</th><th>ACTIONS</th></tr>
+                    <tr><th>Дата</th><th>Клиент</th><th>Т.С.</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php endif; ?>
             </thead>
             <tbody>

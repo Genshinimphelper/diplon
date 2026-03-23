@@ -14,13 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user'] = $user;
         header("Location: index.php"); exit;
     } else {
-        $error = "INVALID CREDENTIALS ACCESS DENIED";
+        $error = "Некорректные данные!";
     }
 
     if ($user && password_verify($password, $user['password'])) {
     // ПРОВЕРКА БЛОКИРОВКИ
     if ($user['is_blocked'] === 't') {
-        $error = "YOUR ACCOUNT IS TERMINATED ACCESS DENIED";
+        $error = "Вы были заблокированы!";
     } else {
         $_SESSION['user'] = $user;
         header("Location: index.php"); exit;

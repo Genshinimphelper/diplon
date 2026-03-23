@@ -16,9 +16,6 @@ require_once 'header.php';
 
 <main class="wrap page-admin-hub">
     <header class="section-header-huge">
-        <div class="admin-status-line">
-            Системная роль: <?= strtoupper($_SESSION['user']['role']) ?> запущено!
-        </div>
         <h1> <span></span></h1>
         <p>Интерфейс управления базой данных, клиентскими запросами и модерацией контента.</p>
     </header>
