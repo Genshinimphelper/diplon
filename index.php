@@ -178,7 +178,10 @@ require_once 'header.php';
             </div>
         </div>
     </div>
-
+    <div class="protocol-grid-industrial">
+    <?php for($i=1; $i<=4; $i++): ?>
+    <div class="prot-box">
+    </div>
     <?php endfor; ?>
 </div>
     </section>
