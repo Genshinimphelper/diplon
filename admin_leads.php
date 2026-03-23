@@ -56,7 +56,7 @@ require_once 'header.php';
 <main class="wrap page-admin">
     <header class="section-header-huge" style="margin-top:60px;">
         <div class="admin-status-line"></div>
-        <h1>МЕнеджер <span>Заявок</span></h1>
+        <h1>Менеджер <span>Заявок</span></h1>
         
         <!-- ВКЛАДКИ 01 - 05 -->
         <div class="admin-tabs-container">
@@ -83,7 +83,7 @@ require_once 'header.php';
         <form method="GET" class="filter-flex-mini">
             <input type="hidden" name="type" value="<?= $type ?>">
             <div class="filter-unit">
-                <label>FILTER_BY_STATUS</label>
+                <label></label>
                 <select name="status" onchange="this.form.submit()">
                     <option value="all" <?= $status_filter == 'all' ? 'selected' : '' ?>>ВСЕ ОПЕРАЦИИ</option>
                     <option value="new" <?= $status_filter == 'new' ? 'selected' : '' ?>>НОВЫЕ</option>
