@@ -39,12 +39,12 @@ require_once 'header.php';
         
         <form method="POST" class="industrial-form">
             <div class="input-unit">
-                <label>IDENTIFIER</label>
+                <label>Ваше Имя(Логин)</label>
                 <input type="text" name="login" placeholder="ENTER LOGIN" required>
             </div>
 
             <div class="input-unit">
-                <label>PASSWORD</label>
+                <label>Пароль</label>
                 <input type="password" name="password" placeholder="••••••••" required>
             </div>
 

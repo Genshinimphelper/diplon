@@ -46,22 +46,22 @@ require_once 'header.php';
 
         <form method="POST" enctype="multipart/form-data" class="industrial-form">
             <div class="input-unit">
-                <label>LOGIN</label>
+                <label>Ваше Имя(Логин)</label>
                 <input type="text" name="login" required>
             </div>
 
             <div class="input-unit">
-                <label>PASSWORD</label>
+                <label>Пароль</label>
                 <input type="password" name="password" required>
             </div>
 
             <div class="input-unit">
-                <label>CONFIRM PASSWORD</label>
+                <label>Подтверждение пароля</label>
                 <input type="password" name="confirm" required>
             </div>
 
             <div class="input-unit">
-                <label>AVATAR IMAGE</label>
+                <label>Иконка профиля</label>
                 <input type="file" name="avatar" accept="image/*" class="industrial-file-input">
             </div>
 
