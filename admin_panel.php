@@ -88,7 +88,7 @@ require_once 'header.php';
         
         <a href="admin_inventory.php" class="hub-card">
     <div class="hub-header">
-        <span class="hub-num">05</span>
+        <span class="hub-num">06</span>
         <span class="hub-icon">📦</span>
     </div>
     <div class="hub-body">
@@ -113,7 +113,7 @@ require_once 'header.php';
 
 <a href="admin_users.php" class="hub-card">
     <div class="hub-header">
-        <span class="hub-num">06</span>
+        <span class="hub-num">07</span>
         <span class="hub-icon">👥</span>
     </div>
     <div class="hub-body">
