@@ -108,7 +108,7 @@ require_once 'header.php';
                 <?php elseif ($type === 'evaluate'): ?>
                     <tr><th>Дата</th><th>Т.С. клиента</th><th>Год/KM</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'testdrive'): ?>
-                    <tr><th>Дата</th><th>Т.С.</th><th>DRIVE DATE</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
+                    <tr><th>Дата</th><th>Т.С.</th><th>Дата заезда</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php elseif ($type === 'booking'): ?>
                     <tr><th>Дата</th><th>Клиент</th><th>Т.С.</th><th>Номер телефона</th><th>Статус</th><th>Действие</th></tr>
                 <?php endif; ?>
