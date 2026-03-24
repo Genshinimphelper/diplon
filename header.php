@@ -2,6 +2,12 @@
 // 1. Инициализация системных файлов
 if (session_status() === PHP_SESSION_NONE) session_start();
 require_once 'db.php';
+// Глобальная загрузка настроек сайта
+$s_query = pg_query($conn, "SELECT key, value FROM site_settings");
+$site = [];
+while($s_row = pg_fetch_assoc($s_query)) {
+    $site[$s_row['key']] = $s_row['value'];
+}
 require_once 'auth.php';
 require_once 'lang.php';
 
