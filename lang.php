@@ -138,6 +138,9 @@ $languages = [
 'st_4_p' => 'Обработка заявок в режиме реального времени.', 'nav_my_bookings' => 'МОИ БРОНИРОВАНИЯ',
 'adm_bookings' => 'БРОНИРОВАНИЕ',
 'btn_cancel_booking' => 'ОТМЕНИТЬ БРОНЬ',
+'adm_settings_h' => 'СИСТЕМНЫЕ <span>НАСТРОЙКИ</span>',
+'adm_settings_sub' => 'Глобальные параметры системы Контакты и бизнес-логика',
+'btn_save_config' => 'СОХРАНИТЬ КОНФИГУРАЦИЮ',
     ],
     'en' => [
         'nav_catalog' => 'Inventory', 'nav_tradein' => 'Trade-in', 'nav_login' => 'Login', 'nav_join' => 'Join', 'nav_admin' => 'Admin', 'nav_profile' => 'Profile', 'nav_exit' => 'Logout',
@@ -270,6 +273,9 @@ $languages = [
 'st_4_p' => 'Real-time application processing.', 'nav_my_bookings' => 'MY RESERVATIONS',
 'adm_bookings' => 'BOOKINGS',
 'btn_cancel_booking' => 'CANCEL RESERVATION',
+'adm_settings_h' => 'SYSTEM <span>SETTINGS</span>',
+'adm_settings_sub' => 'Global system parameters Contacts and business logic',
+'btn_save_config' => 'SAVE CONFIGURATION',
     ]
 ];
 if (isset($_GET['lang']) && array_key_exists($_GET['lang'], $languages)) $_SESSION['lang'] = $_GET['lang'];

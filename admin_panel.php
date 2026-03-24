@@ -122,6 +122,19 @@ require_once 'header.php';
     </div>
     <div class="hub-footer">Открыть меню ползователей</div>
 </a>
+
+
+<a href="admin_settings.php" class="hub-card">
+    <div class="hub-header">
+        <span class="hub-num">08</span>
+        <span class="hub-icon">⚙️</span>
+    </div>
+    <div class="hub-body">
+        <h3>Системные данные</h3>
+        <p>Управление глобальными переменными, контактами и бизнес-логикой</p>
+    </div>
+    <div class="hub-footer">Изменение параметров →</div>
+</a>
         <?php else: ?>
         <div class="hub-card placeholder">
             <div class="hub-body">
