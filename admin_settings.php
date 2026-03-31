@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_settings'])) {
 }
 
 // 2. Запрос всех настроек (Добавлена проверка на успех запроса)
-$res = pg_query($conn, "SELECT * FROM public.site_settings ORDER BY id ASC");
+$res = pg_query($conn, 'SELECT * FROM "site_settings" ORDER BY id ASC');
 
 if (!$res) {
     // Если таблица всё еще не найдена, выводим внятный текст вместо Fatal Error
