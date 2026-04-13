@@ -167,24 +167,7 @@ require_once 'header.php';
         </div>
     </section>
 
-    <!-- PROTOCOL -->
-<!-- <section class="wrap section-protocol-industrial">
-    <div class="protocol-header-refined">
-        <h2><?= $txt['sec_protocol'] ?></h2>
-        
-        <!-- Контейнер бегущей строки -->
-        <div class="status-marquee">
-            <div class="marquee-content">
-            </div>
-        </div>
-    </div>
-    <div class="protocol-grid-industrial">
-    <?php for($i=1; $i<=4; $i++): ?>
-    <div class="prot-box">
-    </div>
-    <?php endfor; ?>
-</div>
-    </section> -->
+
 </main>
 
 <?php require_once 'footer.php'; ?>
