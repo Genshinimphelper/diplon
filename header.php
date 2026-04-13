@@ -5,6 +5,12 @@ require_once 'db.php';
 require_once 'auth.php';
 require_once 'lang.php';
 
+$current_page = basename($_SERVER['PHP_SELF']);
+$user_name = isset($_SESSION['user']) ? $_SESSION['user']['login'] : 'Guest';
+$log_msg = "USER: $user_name accessed $current_page";
+
+pg_query_params($conn, "INSERT INTO system_events (event_text) VALUES ($1)", [$log_msg]);
+
 // 2. СИНХРОНИЗАЦИЯ СЕССИИ С БАЗОЙ ДАННЫХ (Для мгновенной смены ролей и блокировки)
 if (isset($_SESSION['user'])) {
     $uid = (int)$_SESSION['user']['id'];

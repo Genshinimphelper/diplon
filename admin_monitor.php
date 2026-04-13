@@ -30,7 +30,7 @@ require_once 'header.php';
             <div class="cpu-bar-container">
                 <div class="cpu-bar-fill" style="width: 45%; background: var(--text);"></div>
             </div>
-            <span class="mon-value">458 MB 1024 MB</span>
+            <span id="ram-info" class="mon-value">Сканирование...</span>
         </div>
 
         <!-- Блок 3: Сетевой статус -->
@@ -97,35 +97,37 @@ require_once 'header.php';
 </style>
 
 <script>
-// Оживляем монитор
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Имитация CPU
-    setInterval(() => {
-        const val = Math.floor(Math.random() * (25 - 5 + 1)) + 5;
-        document.getElementById('cpu-fill').style.width = val + '%';
-        document.getElementById('cpu-val').innerText = val + '.4% STABLE';
-    }, 2000);
+async function refreshMonitor() {
+    try {
+        const response = await fetch('api_monitor.php');
+        const data = await response.json();
 
-    // 2. Имитация Лога
-    const log = document.getElementById('terminal-log');
-    const actions = [
-        "GET /index.php 200 OK",
-        "POST /admin_leads.php UPDATE_STATUS",
-        "AUTH_REQUEST: user 'admin' authorized",
-        "CACHE_PURGE: temporary files cleared",
-        "DATABASE_QUERY: SELECT * FROM cars",
-        "SESSION_RENEW: sid_8f2a...e41",
-        "LOG_REPORT: system status 100% stable"
-    ];
+        // 1. Обновляем CPU бар
+        const cpuFill = document.getElementById('cpu-fill');
+        const cpuVal = document.getElementById('cpu-val');
+        cpuFill.style.width = data.cpu + '%';
+        cpuVal.innerText = data.cpu + '% // KERNEL_LOAD';
 
-    setInterval(() => {
-        const line = document.createElement('div');
-        line.className = 'log-line';
-        line.innerText = '> ' + actions[Math.floor(Math.random() * actions.length)];
-        log.appendChild(line);
-        if(log.childNodes.length > 10) log.removeChild(log.childNodes[0]);
-    }, 3000);
-});
+        // 2. Обновляем память (реальные данные из PHP)
+        document.getElementById('ram-info').innerText = data.ram + ' // PHP_ALLOCATED';
+
+        // 3. Обновляем Терминал (реальные логи из БД)
+        const terminal = document.getElementById('terminal-log');
+        terminal.innerHTML = ''; // Очищаем старое
+        
+        data.logs.forEach(item => {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.innerText = `[${item.time}] > ${item.event_text}`;
+            terminal.appendChild(line);
+        });
+
+    } catch (error) {
+        console.error("Monitor connection lost...", error);
+    }
+}
+setInterval(refreshMonitor, 3000);
+refreshMonitor();
 </script>
 
 <?php require_once 'footer.php'; ?>
