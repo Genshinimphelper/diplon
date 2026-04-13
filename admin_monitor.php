@@ -37,8 +37,8 @@ require_once 'header.php';
         <div class="monitor-card">
             <label>Трафик</label>
             <div class="network-flex">
-                <div class="net-stat">UP: <b style="color:var(--accent)">1.2 MB/s</b></div>
-                <div class="net-stat">DOWN: <b style="color:#00FF66">8.4 MB/s</b></div>
+                <div class="net-stat">UP: <b style="color:var(--accent)"> MB/s</b></div>
+                <div class="net-stat">DOWN: <b style="color:#00FF66"> MB/s</b></div>
             </div>
         </div>
 
@@ -106,10 +106,10 @@ async function refreshMonitor() {
         const cpuFill = document.getElementById('cpu-fill');
         const cpuVal = document.getElementById('cpu-val');
         cpuFill.style.width = data.cpu + '%';
-        cpuVal.innerText = data.cpu + '% // KERNEL_LOAD';
+        cpuVal.innerText = data.cpu + '%';
 
         // 2. Обновляем память (реальные данные из PHP)
-        document.getElementById('ram-info').innerText = data.ram + ' // PHP_ALLOCATED';
+        document.getElementById('ram-info').innerText = data.ram + '';
 
         // 3. Обновляем Терминал (реальные логи из БД)
         const terminal = document.getElementById('terminal-log');

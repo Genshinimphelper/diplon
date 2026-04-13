@@ -171,7 +171,7 @@ require_once 'header.php';
                         <input type="hidden" name="car_id" value="<?= $car['id'] ?>">
                         <label><?= $txt['lead_title'] ?></label>
                         <input type="text" name="phone" placeholder="+7 ТЕЛЕФОН" required>
-                        <button type="submit" class="btn-small-industrial">ОТправить заявку</button>
+                        <button type="submit" class="btn-small-industrial">Отправить заявку</button>
                     </form>
                 </div>
 
