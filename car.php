@@ -130,7 +130,7 @@ require_once 'header.php';
                     <h1 class="model-line"><?= htmlspecialchars($car['model']) ?></h1>
                     <div class="price-line">
                         <?= number_format($car['price'], 0, '', ' ') ?> 
-                        <small>RUB</small>
+                        <small>РУБ</small>
                     </div>
                 </div>
 
@@ -154,7 +154,7 @@ require_once 'header.php';
                         <tr><td><?= $txt['spec_km_title'] ?></td><td><?= number_format($car['mileage'], 0, '', ' ') ?> KM</td></tr>
                         <tr><td><?= $txt['spec_power'] ?></td><td><?= (int)$car['power'] ?> HP</td></tr>
                         <tr><td><?= $txt['spec_trans'] ?></td><td><?= htmlspecialchars($car['transmission_name'] ?? 'N/A') ?></td></tr>
-                        <tr><td>DEALER RATING</td><td><?= $avg_rating ?> / 5.0 </td></tr>
+                        <tr><td>Рейтинг</td><td><?= $avg_rating ?> / 5.0 </td></tr>
                     </table>
                 </div>
 
@@ -171,7 +171,7 @@ require_once 'header.php';
                         <input type="hidden" name="car_id" value="<?= $car['id'] ?>">
                         <label><?= $txt['lead_title'] ?></label>
                         <input type="text" name="phone" placeholder="+7 ТЕЛЕФОН" required>
-                        <button type="submit" class="btn-small-industrial">SEND REQUEST</button>
+                        <button type="submit" class="btn-small-industrial">ОТправить заявку</button>
                     </form>
                 </div>
 

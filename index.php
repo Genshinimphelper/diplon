@@ -168,7 +168,7 @@ require_once 'header.php';
     </section>
 
     <!-- PROTOCOL -->
-<section class="wrap section-protocol-industrial">
+<!-- <section class="wrap section-protocol-industrial">
     <div class="protocol-header-refined">
         <h2><?= $txt['sec_protocol'] ?></h2>
         
@@ -184,7 +184,7 @@ require_once 'header.php';
     </div>
     <?php endfor; ?>
 </div>
-    </section>
+    </section> -->
 </main>
 
 <?php require_once 'footer.php'; ?>

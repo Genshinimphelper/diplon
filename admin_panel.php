@@ -124,7 +124,7 @@ require_once 'header.php';
 </a>
 
 
-<a href="admin_settings.php" class="hub-card">
+<!-- <a href="admin_settings.php" class="hub-card">
     <div class="hub-header">
         <span class="hub-num">08</span>
         <span class="hub-icon">⚙️</span>
@@ -134,7 +134,7 @@ require_once 'header.php';
         <p>Управление глобальными переменными, контактами и бизнес-логикой</p>
     </div>
     <div class="hub-footer">Изменение параметров →</div>
-</a>
+</a> -->
         <?php else: ?>
         <div class="hub-card placeholder">
             <div class="hub-body">
