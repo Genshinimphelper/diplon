@@ -34,13 +34,16 @@ require_once 'header.php';
         </div>
 
         <!-- Блок 3: Сетевой статус -->
-        <div class="monitor-card">
-            <label>Трафик</label>
-            <div class="network-flex">
-                <div class="net-stat">UP: <b style="color:var(--accent)"> MB/s</b></div>
-                <div class="net-stat">DOWN: <b style="color:#00FF66"> MB/s</b></div>
-            </div>
-        </div>
+<div class="monitor-card">
+    <label>Трафик</label>
+    <div class="network-flex">
+        <div class="net-stat">UP: <b id="net-up" style="color:var(--accent)">SCANNING...</b></div>
+        <div class="net-stat">DOWN: <b id="net-down" style="color:#00FF66">SCANNING...</b></div>
+    </div>
+    <!-- Добавим пинг (реальное время задержки) -->
+    <div style="margin-top:10px; font-size:0.6rem; color:var(--text-muted);"> Задержка: <span id="latency-val" style="color:#fff;">0</span> ms
+    </div>
+</div>
 
         <!-- Блок 4: Лог событий (Бегущие строки) -->
         <div class="monitor-card terminal-card" style="grid-column: span 2;">
@@ -98,23 +101,30 @@ require_once 'header.php';
 
 <script>
 async function refreshMonitor() {
+    const startTime = performance.now(); // Засекаем время начала запроса
+
     try {
         const response = await fetch('api_monitor.php');
         const data = await response.json();
-
-        // 1. Обновляем CPU бар
-        const cpuFill = document.getElementById('cpu-fill');
-        const cpuVal = document.getElementById('cpu-val');
-        cpuFill.style.width = data.cpu + '%';
-        cpuVal.innerText = data.cpu + '%';
-
-        // 2. Обновляем память (реальные данные из PHP)
-        document.getElementById('ram-info').innerText = data.ram + '';
-
-        // 3. Обновляем Терминал (реальные логи из БД)
-        const terminal = document.getElementById('terminal-log');
-        terminal.innerHTML = ''; // Очищаем старое
         
+        const endTime = performance.now(); // Засекаем время окончания
+        const latency = Math.round(endTime - startTime); // Вычисляем пинг
+
+        // 1. Обновляем CPU и RAM
+        document.getElementById('cpu-fill').style.width = data.cpu + '%';
+        document.getElementById('cpu-val').innerText = data.cpu + '% // STABLE';
+        document.getElementById('ram-info').innerText = data.ram + ' // ALLOCATED';
+
+        // 2. Обновляем СКОРОСТЬ (из API)
+        document.getElementById('net-up').innerText = data.net_up;
+        document.getElementById('net-down').innerText = data.net_down;
+
+        // 3. Обновляем РЕАЛЬНЫЙ ПИНГ
+        document.getElementById('latency-val').innerText = latency;
+
+        // 4. Обновляем Терминал
+        const terminal = document.getElementById('terminal-log');
+        terminal.innerHTML = '';
         data.logs.forEach(item => {
             const line = document.createElement('div');
             line.className = 'log-line';
@@ -123,10 +133,11 @@ async function refreshMonitor() {
         });
 
     } catch (error) {
-        console.error("Monitor connection lost...", error);
+        console.error("Link broken...");
     }
 }
-setInterval(refreshMonitor, 3000);
+
+setInterval(refreshMonitor, 2000); // Обновляем каждые 2 секунды
 refreshMonitor();
 </script>
 
