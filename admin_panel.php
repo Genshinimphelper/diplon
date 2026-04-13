@@ -124,17 +124,17 @@ require_once 'header.php';
 </a>
 
 
-<!-- <a href="admin_settings.php" class="hub-card">
+<a href="admin_monitor.php" class="hub-card">
     <div class="hub-header">
         <span class="hub-num">08</span>
-        <span class="hub-icon">⚙️</span>
+        <span class="hub-icon">📊</span>
     </div>
     <div class="hub-body">
-        <h3>Системные данные</h3>
-        <p>Управление глобальными переменными, контактами и бизнес-логикой</p>
+        <h3>Мониторинг системы</h3>
+        <p>Технический контроль состояния сервера и логов безопасности</p>
     </div>
-    <div class="hub-footer">Изменение параметров →</div>
-</a> -->
+    <div class="hub-footer">Live режим →</div>
+</a>
         <?php else: ?>
         <div class="hub-card placeholder">
             <div class="hub-body">
