@@ -45,7 +45,7 @@ require_once 'header.php';
 <main class="wrap page-admin">
     <header class="section-header-huge" style="margin-top:60px;">
         <div class="admin-status-line"></div>
-        <h1>REVIEWS <span>CONTROL</span></h1>
+        <h1>Отзывы <span></span></h1>
         
         <!-- ВКЛАДКИ -->
         <div class="admin-tabs-container" style="margin-top: 30px;">
@@ -62,11 +62,11 @@ require_once 'header.php';
         <table class="admin-table">
             <thead>
                 <tr>
-                    <th>USER</th>
-                    <th>VEHICLE</th>
-                    <th>COMMENT / FEEDBACK</th>
-                    <th>DATE</th>
-                    <th>ACTIONS</th>
+                    <th>Пользователь</th>
+                    <th>ТС</th>
+                    <th>Коммеентарий / Обратная связь</th>
+                    <th>Дата</th>
+                    <th>Статус</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,7 +91,7 @@ require_once 'header.php';
             <!-- Кнопка ОДОБРИТЬ (только в очереди) -->
             <a href="?action=approve&id=<?= $r['id'] ?>&view=pending" 
                class="action-btn approve-link">
-               APPROVE
+               Одобрить
             </a>
         <?php endif; ?>
         
@@ -99,7 +99,7 @@ require_once 'header.php';
         <a href="?action=delete&id=<?= $r['id'] ?>&view=<?= $view ?>" 
            class="action-btn delete-link" 
            onclick="return confirm('DELETE THIS REVIEW PERMANENTLY?')">
-           DELETE
+           Удалить
         </a>
     </div>
 </td>
@@ -109,7 +109,7 @@ require_once 'header.php';
                 <?php if (pg_num_rows($res) === 0): ?>
                     <tr>
                         <td colspan="5" style="text-align:center; padding: 100px; color: var(--text-muted);">
-                             NO RECORDS FOUND IN THIS CATEGORY
+                             Нет отзывов...
                         </td>
                     </tr>
                 <?php endif; ?>
