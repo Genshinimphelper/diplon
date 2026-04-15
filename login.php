@@ -40,7 +40,7 @@ require_once 'header.php';
         <form method="POST" class="industrial-form">
             <div class="input-unit">
                 <label>Ваше Имя(Логин)</label>
-                <input type="text" name="login" placeholder="ENTER LOGIN" required>
+                <input type="text" name="login" placeholder="ВВОД ЛОГИНА" required>
             </div>
 
             <div class="input-unit">

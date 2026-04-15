@@ -276,7 +276,8 @@ $languages = [
 'btn_cancel_booking' => 'CANCEL RESERVATION',
 'adm_settings_h' => 'SYSTEM <span>SETTINGS</span>',
 'adm_settings_sub' => 'Global system parameters Contacts and business logic',
-'btn_save_config' => 'SAVE CONFIGURATION', 'adm_monitor_h' => 'SYSTEM <span>MONITOR</span>'
+'btn_save_config' => 'SAVE CONFIGURATION', 'adm_monitor_h' => 'SYSTEM <span>MONITOR</span>',
+'adm_monitor_h' => 'СИСТЕМНЫЙ <span>МОНИТОР</span>'
     ]
 ];
 if (isset($_GET['lang']) && array_key_exists($_GET['lang'], $languages)) $_SESSION['lang'] = $_GET['lang'];
