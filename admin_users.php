@@ -28,7 +28,7 @@ require_once 'header.php';
 
 <main class="wrap page-admin">
     <header class="section-header-huge" style="margin-top:60px;">
-        <div class="admin-status-line">SYSTEM // USER_DATABASE // ACCESS_CONTROL</div>
+        <div class="admin-status-line"></div>
         <h1><?= $txt['adm_users_h'] ?></h1>
         <p><?= $txt['adm_users_sub'] ?></p>
     </header>
