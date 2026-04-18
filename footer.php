@@ -30,17 +30,19 @@
             </div>
 
             <!-- 4. СОЦСЕТИ И КНОПКА -->
-            <div class="footer-col-actions">
-                <h4><?= $txt['f_social'] ?></h4>
-                <div class="footer-social-links">
-                    <a href="#" class="social-box">TG</a>
-                    <a href="#" class="social-box">VK</a>
-                    <a href="#" class="social-box">YT</a>
-                </div>
-                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-to-top">
-                    UP ↑
-                </button>
-            </div>
+<div class="footer-col-actions">
+    <h4><?= $txt['f_social'] ?></h4>
+    <div class="footer-social-links">
+        <a href="#" class="social-box">TG</a>
+        <a href="#" class="social-box">VK</a>
+        <a href="#" class="social-box">YT</a>
+        
+        <!-- Кнопка UP теперь внутри этого же контейнера -->
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="social-box btn-to-top-industrial" title="Наверх">
+            ↑
+        </button>
+    </div>
+</div>
 
         </div>
 
