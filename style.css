@@ -3323,3 +3323,54 @@ select {
     margin-bottom: 30px; /* Добавляем отступ, чтобы не наезжала на паспорт */
     border: 1px solid var(--border);
 }
+
+/* --- СТИЛИЗАЦИЯ ПЕРЕКЛЮЧАТЕЛЯ РОЛЕЙ --- */
+.admin-table select {
+    appearance: none;
+    -webkit-appearance: none;
+    
+    /* Цвета */
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid var(--border) !important;
+    
+    /* Шрифт и текст */
+    font-family: monospace; /* Технический стиль */
+    font-size: 0.7rem !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* Размеры и отступы */
+    padding: 8px 35px 8px 12px !important; /* Увеличили правый отступ для стрелки */
+    cursor: pointer;
+    width: auto; /* Не растягиваем на всю ячейку */
+    min-width: 130px;
+    border-radius: 0;
+    
+    /* Кастомная стрелка (исправлено позиционирование) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23FF4D00'%3E%3Cpath d='M0 3h12L6 10z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: calc(100% - 12px) center !important; /* Стрелка всегда справа */
+    background-size: 10px !important;
+    
+    transition: 0.2s;
+}
+
+.admin-table select:hover {
+    border-color: var(--accent) !important;
+    background-color: #050505 !important;
+}
+
+.admin-table select:focus {
+    outline: none;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(255, 77, 0, 0.1);
+}
+
+/* Стилизация выпадающих пунктов (options) */
+.admin-table select option {
+    background: #111;
+    color: #fff;
+    padding: 10px;
+}
