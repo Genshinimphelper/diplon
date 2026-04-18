@@ -33,7 +33,7 @@
 <div class="footer-col-actions">
     <h4><?= $txt['f_social'] ?></h4>
     <div class="footer-social-links">
-        <a href="#" class="social-box">TG</a>
+        <a href="https://t.me/+RPCKEAqvDcRiMjMy" class="social-box">TG</a>
         <a href="#" class="social-box">VK</a>
         <a href="#" class="social-box">YT</a>
         
@@ -57,7 +57,7 @@
             </p>
         </div>
     </div>
-</footer>
+</footer>   
 
 <script src="script.js"></script>
 </body>
