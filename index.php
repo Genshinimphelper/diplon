@@ -90,7 +90,7 @@ require_once 'header.php';
             <form action="process_leads.php?type=evaluate" method="POST" class="inner-form-industrial">
                 <div class="form-group-industrial">
                     <label><?= $txt['ph_your_car'] ?></label>
-                    <input type="text" name="car_info" placeholder="BRAND / MODEL" required>
+                    <input type="text" name="car_info" placeholder="Марка / Модель" required>
                 </div>
                 
                 <div class="form-row-2">
